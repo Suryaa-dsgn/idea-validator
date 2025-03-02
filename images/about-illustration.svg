@@ -64,10 +64,10 @@
     <g>
         <!-- Idea Bubble 1 - Financial App -->
         <g transform="translate(120, 100)" filter="url(#shadow)">
-            <circle cx="0" cy="0" r="35" fill="white" />
+            <circle cx="0" cy="0" r="40" fill="white" />
             <path d="M0,35 L10,50 L-10,40 Z" fill="white" />
-            <text x="0" y="0" font-family="Arial, sans-serif" font-size="10" fill="#64748b" text-anchor="middle">Financial</text>
-            <text x="0" y="15" font-family="Arial, sans-serif" font-size="10" fill="#64748b" text-anchor="middle">App</text>
+            <text x="0" y="15" font-family="Arial, sans-serif" font-size="10" fill="#64748b" text-anchor="middle">Financial</text>
+            <text x="0" y="30" font-family="Arial, sans-serif" font-size="10" fill="#64748b" text-anchor="middle">App</text>
             
             <!-- Money/Finance Icon -->
             <circle cx="0" cy="-15" r="15" fill="#f8fafc" />
@@ -78,10 +78,10 @@
         
         <!-- Idea Bubble 2 - Food Delivery -->
         <g transform="translate(380, 100)" filter="url(#shadow)">
-            <circle cx="0" cy="0" r="35" fill="white" />
+            <circle cx="0" cy="0" r="40" fill="white" />
             <path d="M0,35 L-10,50 L10,40 Z" fill="white" />
-            <text x="0" y="0" font-family="Arial, sans-serif" font-size="10" fill="#64748b" text-anchor="middle">Food</text>
-            <text x="0" y="15" font-family="Arial, sans-serif" font-size="10" fill="#64748b" text-anchor="middle">Delivery</text>
+            <text x="0" y="15" font-family="Arial, sans-serif" font-size="10" fill="#64748b" text-anchor="middle">Food</text>
+            <text x="0" y="30" font-family="Arial, sans-serif" font-size="10" fill="#64748b" text-anchor="middle">Delivery</text>
             
             <!-- Food Icon -->
             <circle cx="0" cy="-15" r="15" fill="#f8fafc" />
@@ -92,10 +92,10 @@
         
         <!-- Idea Bubble 3 - Social Network -->
         <g transform="translate(70, 240)" filter="url(#shadow)">
-            <circle cx="0" cy="0" r="35" fill="white" />
+            <circle cx="0" cy="0" r="40" fill="white" />
             <path d="M35,0 L50,10 L40,-10 Z" fill="white" />
-            <text x="0" y="0" font-family="Arial, sans-serif" font-size="10" fill="#64748b" text-anchor="middle">Social</text>
-            <text x="0" y="15" font-family="Arial, sans-serif" font-size="10" fill="#64748b" text-anchor="middle">Network</text>
+            <text x="0" y="15" font-family="Arial, sans-serif" font-size="10" fill="#64748b" text-anchor="middle">Social</text>
+            <text x="0" y="30" font-family="Arial, sans-serif" font-size="10" fill="#64748b" text-anchor="middle">Network</text>
             
             <!-- People Icon -->
             <circle cx="-8" cy="-15" r="7" fill="#f8fafc" />
@@ -110,10 +110,10 @@
         
         <!-- Idea Bubble 4 - AI Chatbot -->
         <g transform="translate(420, 240)" filter="url(#shadow)">
-            <circle cx="0" cy="0" r="35" fill="white" />
+            <circle cx="0" cy="0" r="40" fill="white" />
             <path d="M-35,0 L-50,10 L-40,-10 Z" fill="white" />
-            <text x="0" y="0" font-family="Arial, sans-serif" font-size="10" fill="#64748b" text-anchor="middle">AI</text>
-            <text x="0" y="15" font-family="Arial, sans-serif" font-size="10" fill="#64748b" text-anchor="middle">Chatbot</text>
+            <text x="0" y="15" font-family="Arial, sans-serif" font-size="10" fill="#64748b" text-anchor="middle">AI</text>
+            <text x="0" y="30" font-family="Arial, sans-serif" font-size="10" fill="#64748b" text-anchor="middle">Chatbot</text>
             
             <!-- Chat Bubble Icon -->
             <rect x="-15" y="-25" width="30" height="20" rx="5" fill="#f8fafc" />
