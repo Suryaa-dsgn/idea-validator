@@ -1,0 +1,39 @@
+import { Express, Request, Response } from 'express';
+import authRoutes from './authRoutes';
+import ideaRoutes from './ideaRoutes';
+import stripeRoutes from './stripeRoutes';
+
+/**
+ * Setup all API routes
+ */
+export const setupRoutes = (app: Express) => {
+  // API route prefix
+  const API_PREFIX = '/api';
+
+  // Auth Routes
+  app.use(`${API_PREFIX}/auth`, authRoutes);
+
+  // Idea Routes
+  app.use(`${API_PREFIX}/ideas`, ideaRoutes);
+
+  // Payment Routes
+  app.use(`${API_PREFIX}/payments`, stripeRoutes);
+
+  // Health check route
+  app.get('/health', (req: Request, res: Response) => {
+    res.status(200).json({
+      success: true,
+      message: 'API is running',
+      environment: process.env.NODE_ENV,
+      timestamp: new Date().toISOString(),
+    });
+  });
+
+  // 404 route for API
+  app.use(`${API_PREFIX}/*`, (req: Request, res: Response) => {
+    res.status(404).json({
+      success: false,
+      message: 'API route not found',
+    });
+  });
+}; 
