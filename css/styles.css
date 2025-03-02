@@ -335,10 +335,11 @@ section {
     flex: 1;
     padding: 1rem 1.5rem;
     border: 1px solid #e2e8f0;
-    border-radius: var(--border-radius-full) 0 0 var(--border-radius-full);
+    border-radius: var(--border-radius-full);
     font-size: 1rem;
     outline: none;
     transition: border-color var(--transition-fast);
+    margin-right: 10px;
 }
 
 .idea-input:focus {
@@ -346,7 +347,7 @@ section {
 }
 
 .validate-btn {
-    border-radius: 0 var(--border-radius-full) var(--border-radius-full) 0;
+    border-radius: var(--border-radius-full);
     padding-left: 1.5rem;
     padding-right: 1.5rem;
 }
@@ -1240,6 +1241,7 @@ footer {
     .idea-input {
         border-radius: var(--border-radius-md);
         margin-bottom: var(--spacing-md);
+        margin-right: 0;
     }
     
     .validate-btn {
