@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+    <defs>
+        <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#6366f1" />
+            <stop offset="100%" stop-color="#8b5cf6" />
+        </linearGradient>
+    </defs>
+    
+    <!-- Background Circle -->
+    <circle cx="100" cy="100" r="100" fill="url(#bg-gradient)" />
+    
+    <!-- Face/Avatar -->
+    <circle cx="100" cy="85" r="40" fill="#f8fafc" />
+    
+    <!-- Hair -->
+    <path d="M60,85 C60,55 80,45 100,45 C120,45 140,55 140,85 C140,85 140,75 130,65 C120,55 110,55 100,55 C90,55 80,55 70,65 C60,75 60,85 60,85 Z" fill="#1e293b" />
+    
+    <!-- Eyes -->
+    <circle cx="85" cy="80" r="5" fill="#1e293b" />
+    <circle cx="115" cy="80" r="5" fill="#1e293b" />
+    
+    <!-- Smile -->
+    <path d="M85,100 C90,110 110,110 115,100" fill="none" stroke="#1e293b" stroke-width="3" stroke-linecap="round" />
+    
+    <!-- Body/Shoulders -->
+    <path d="M60,140 C60,120 80,115 100,115 C120,115 140,120 140,140" fill="#f8fafc" />
+</svg> 
