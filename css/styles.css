@@ -72,6 +72,17 @@ body {
     color: var(--dark);
     background-color: var(--white);
     overflow-x: hidden;
+    position: relative;
+    background-image: 
+        radial-gradient(circle, var(--dark-gray) 0.7px, transparent 0.7px),
+        radial-gradient(circle, var(--dark-gray) 0.7px, transparent 0.7px);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+}
+
+/* Remove the previous pseudo-element pattern that wasn't visible */
+body::before {
+    content: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -598,6 +609,7 @@ section {
     border-radius: var(--border-radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow-xl);
+    animation: float 6s ease-in-out infinite;
 }
 
 .demo-header {
@@ -710,7 +722,7 @@ section {
     gap: var(--spacing-lg);
     padding: var(--spacing-md) 0;
     width: 100%;
-    transition: transform 0.5s ease-in-out;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
     will-change: transform;
 }
 
@@ -722,6 +734,9 @@ section {
     flex: 0 0 calc(33.333% - var(--spacing-lg));
     min-width: 280px;
     transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .testimonial-card:hover {
@@ -729,15 +744,22 @@ section {
     box-shadow: var(--shadow-lg);
 }
 
-.quote-icon {
-    color: var(--primary-light);
-    font-size: 2rem;
-    margin-bottom: var(--spacing-md);
+.testimonial-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .testimonial-content p {
     font-style: italic;
     margin-bottom: var(--spacing-lg);
+    flex-grow: 1;
+}
+
+.quote-icon {
+    color: var(--primary-light);
+    font-size: 2rem;
+    margin-bottom: var(--spacing-md);
 }
 
 .testimonial-author {
@@ -1171,6 +1193,57 @@ footer {
     }
 }
 
+@keyframes rotateGradient {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes gradientMove {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        transform: rotate(180deg) scale(1.2);
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+@keyframes gradientPulse {
+    0% {
+        opacity: 0.4;
+        transform: scale(0.95);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0.4;
+        transform: scale(0.95);
+    }
+}
+
+@keyframes portalGlow {
+    0% {
+        opacity: 0.7;
+        filter: blur(5px);
+    }
+    50% {
+        opacity: 1;
+        filter: blur(8px);
+    }
+    100% {
+        opacity: 0.7;
+        filter: blur(5px);
+    }
+}
+
 /* ===== RESPONSIVE STYLES ===== */
 @media (max-width: 1024px) {
     h1 {
@@ -1205,8 +1278,13 @@ footer {
         margin: 0 auto;
     }
 
+    .testimonial-slider {
+        gap: var(--spacing-md);
+    }
+    
     .testimonial-card {
-        flex: 0 0 calc(50% - var(--spacing-lg));
+        flex: 0 0 calc(50% - var(--spacing-md));
+        min-height: 380px;
     }
 }
 
@@ -1238,7 +1316,8 @@ footer {
     }
     
     .testimonial-card {
-        flex: 0 0 calc(100% - var(--spacing-lg));
+        flex: 0 0 100%;
+        min-height: 320px;
     }
 }
 
@@ -1406,6 +1485,372 @@ footer {
 .mobile-menu-overlay.active {
     opacity: 1;
     visibility: visible;
+}
+
+/* === User Portal Section === */
+.user-portal {
+    position: relative;
+    padding: 6rem 0;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+}
+
+.portal-container {
+    position: relative;
+    height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.gradient-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(233, 168, 255, 0.15) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(198, 168, 255, 0.15) 100%);
+    z-index: 0;
+    overflow: hidden;
+    border-radius: 0;
+    mix-blend-mode: soft-light;
+}
+
+.gradient-background::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    right: -50%;
+    bottom: -50%;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.2) 0%, rgba(233, 168, 255, 0.1) 40%, rgba(198, 168, 255, 0.1) 100%);
+    z-index: 0;
+    animation: gradientMove 15s ease-in-out infinite alternate;
+    transform-origin: center;
+}
+
+.gradient-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(233, 168, 255, 0.1) 0%, rgba(255, 255, 255, 0) 50%, rgba(198, 168, 255, 0.1) 100%);
+    z-index: 1;
+    animation: gradientPulse 8s ease-in-out infinite alternate;
+}
+
+.portal-base {
+    position: absolute;
+    bottom: 20px;
+    width: 200px;
+    height: 50px;
+    z-index: 2;
+}
+
+.portal-ring {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 160px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 30px rgba(168, 190, 255, 0.4), 
+                0 0 60px rgba(223, 168, 255, 0.3);
+    z-index: 2;
+    overflow: hidden;
+    backdrop-filter: blur(5px);
+}
+
+.portal-ring::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, rgba(233, 168, 255, 0.2), rgba(255, 255, 255, 0.3), rgba(198, 168, 255, 0.2));
+    z-index: -1;
+    filter: blur(3px);
+    animation: rotateGradient 8s linear infinite;
+}
+
+.portal-light {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    height: 30px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.7) 0%, rgba(223, 168, 255, 0.3) 70%);
+    filter: blur(5px);
+    z-index: 1;
+    animation: portalGlow 4s ease-in-out infinite alternate;
+}
+
+.floating-avatars {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+}
+
+.avatar {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+}
+
+.avatar img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    object-fit: cover;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+.avatar-1 {
+    animation: floatDiagonal1 12s ease-in-out infinite;
+    animation-delay: 0s;
+}
+
+.avatar-2 {
+    animation: floatDiagonal2 12s ease-in-out infinite;
+    animation-delay: 2s;
+}
+
+.avatar-3 {
+    animation: floatDiagonal3 12s ease-in-out infinite;
+    animation-delay: 4s;
+}
+
+.avatar-4 {
+    animation: floatDiagonal4 12s ease-in-out infinite;
+    animation-delay: 6s;
+}
+
+.avatar-5 {
+    animation: floatDiagonal5 12s ease-in-out infinite;
+    animation-delay: 8s;
+}
+
+.avatar-6 {
+    animation: floatDiagonal1 12s ease-in-out infinite;
+    animation-delay: 10s;
+}
+
+.avatar-7 {
+    animation: floatDiagonal2 12s ease-in-out infinite;
+    animation-delay: 12s;
+}
+
+.avatar-8 {
+    animation: floatDiagonal3 12s ease-in-out infinite;
+    animation-delay: 14s;
+}
+
+.particles-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.particle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 10px rgba(168, 190, 255, 0.6);
+    z-index: 2;
+}
+
+.particle-1, .particle-4 {
+    left: calc(50% - 70px);
+    animation: floatParticle 8s ease-in-out infinite;
+}
+
+.particle-2, .particle-5 {
+    left: 50%;
+    animation: floatParticle 7s ease-in-out infinite;
+    animation-delay: 2s;
+}
+
+.particle-3, .particle-6 {
+    left: calc(50% + 70px);
+    animation: floatParticle 9s ease-in-out infinite;
+    animation-delay: 4s;
+}
+
+/* Portal animations */
+@keyframes rotateGradient {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes floatDiagonal1 {
+    0% {
+        transform: translate(-50%, 0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(calc(-50% + 120px), -300px);
+        opacity: 0;
+    }
+}
+
+@keyframes floatDiagonal2 {
+    0% {
+        transform: translate(-50%, 0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(calc(-50% - 120px), -300px);
+        opacity: 0;
+    }
+}
+
+@keyframes floatDiagonal3 {
+    0% {
+        transform: translate(-50%, 0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(calc(-50% + 80px), -320px);
+        opacity: 0;
+    }
+}
+
+@keyframes floatDiagonal4 {
+    0% {
+        transform: translate(-50%, 0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(calc(-50% - 80px), -320px);
+        opacity: 0;
+    }
+}
+
+@keyframes floatDiagonal5 {
+    0% {
+        transform: translate(-50%, 0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -340px);
+        opacity: 0;
+    }
+}
+
+@keyframes floatParticle {
+    0% {
+        bottom: 60px;
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        bottom: 350px;
+        opacity: 0;
+        transform: scale(0);
+    }
+}
+
+/* Responsive styles for portal section */
+@media (max-width: 768px) {
+    .portal-container {
+        height: 350px;
+    }
+    
+    .portal-ring {
+        width: 120px;
+        height: 30px;
+    }
+    
+    .portal-light {
+        width: 100px;
+        height: 20px;
+    }
+    
+    .avatar img {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .portal-container {
+        height: 300px;
+    }
+    
+    .portal-ring {
+        width: 100px;
+        height: 25px;
+    }
+    
+    .portal-light {
+        width: 80px;
+        height: 15px;
+    }
+    
+    .avatar img {
+        width: 40px;
+        height: 40px;
+    }
 }
 
 /* End of stylesheet - Last updated for GitHub push */

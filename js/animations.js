@@ -149,11 +149,29 @@ document.addEventListener('DOMContentLoaded', () => {
         function updateVisibleSlides() {
             if (window.innerWidth < 768) {
                 maxVisibleSlides = 1;
+                testimonialSlider.style.gap = "var(--spacing-md)";
             } else if (window.innerWidth < 1024) {
                 maxVisibleSlides = 2;
+                testimonialSlider.style.gap = "var(--spacing-md)";
             } else {
                 maxVisibleSlides = 3;
+                testimonialSlider.style.gap = "var(--spacing-lg)";
             }
+            
+            // Update slider card widths based on visible slides
+            const cards = testimonialSlider.querySelectorAll('.testimonial-card');
+            const gapValue = window.innerWidth < 1024 ? 16 : 24; // Convert spacing vars to px values
+            
+            cards.forEach(card => {
+                if (maxVisibleSlides === 1) {
+                    card.style.flex = "0 0 100%";
+                } else if (maxVisibleSlides === 2) {
+                    card.style.flex = `0 0 calc(50% - ${gapValue/2}px)`;
+                } else {
+                    card.style.flex = `0 0 calc(33.333% - ${gapValue*2/3}px)`;
+                }
+            });
+            
             updateSlider();
         }
         
@@ -201,11 +219,15 @@ document.addEventListener('DOMContentLoaded', () => {
         function updateSlider() {
             isTransitioning = true;
             
-            // Calculate the percentage to move based on visible slides
-            const slidePercentage = 100 / Math.min(totalSlides, maxVisibleSlides);
-            const translateValue = currentSlide * slidePercentage;
+            // Calculate the slide width including gap
+            const slideWidth = testimonialSlider.querySelector('.testimonial-card').offsetWidth;
+            const sliderGap = window.innerWidth < 1024 ? 16 : 24; // Match the gap values
+            const slideWidthWithGap = slideWidth + sliderGap;
             
-            testimonialSlider.style.transform = `translateX(-${translateValue}%)`;
+            // Calculate the pixel value to translate
+            const translatePixels = currentSlide * slideWidthWithGap;
+            
+            testimonialSlider.style.transform = `translateX(-${translatePixels}px)`;
             
             // Update active dot
             dots.forEach((dot, index) => {
@@ -389,4 +411,78 @@ style.textContent = `
     }
 `;
 
-document.head.appendChild(style); 
+document.head.appendChild(style);
+
+// Portal animation enhancements
+document.addEventListener('DOMContentLoaded', function() {
+    // Only initialize if the portal section exists
+    if (document.querySelector('.portal-container')) {
+        initPortalAnimations();
+    }
+});
+
+function initPortalAnimations() {
+    // Get portal elements
+    const avatars = document.querySelectorAll('.floating-avatars .avatar');
+    const particles = document.querySelectorAll('.particles-container .particle');
+    const portalLight = document.querySelector('.portal-light');
+    
+    // Initialize avatar animations with consistent timing
+    avatars.forEach((avatar, index) => {
+        // Set consistent 2-second intervals between avatars
+        avatar.style.animationDelay = `${index * 2}s`;
+        
+        // Add slight variation to animation duration for more natural movement
+        const baseDuration = 12; // base duration from CSS
+        const randomOffset = Math.random() * 1 - 0.5; // -0.5 to +0.5 seconds
+        avatar.style.animationDuration = `${baseDuration + randomOffset}s`;
+        
+        // Add cubic bezier curve with randomness for more natural motion paths
+        const x1 = Math.random() * 0.2 + 0.4; // 0.4-0.6
+        const x2 = Math.random() * 0.2 + 0.4; // 0.4-0.6
+        avatar.style.animationTimingFunction = `cubic-bezier(${x1}, 0.2, ${x2}, 1)`;
+    });
+    
+    // Position particles with more variation
+    particles.forEach(particle => {
+        // Random horizontal position within constraints
+        const xOffset = Math.random() * 240 - 120; // -120px to +120px from center
+        particle.style.left = `calc(50% + ${xOffset}px)`;
+        
+        // Random size for particles
+        const size = Math.random() * 6 + 4; // 4px to 10px
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        
+        // Random animation duration with smaller range
+        const duration = Math.random() * 3 + 7; // 7s to 10s
+        particle.style.animationDuration = `${duration}s`;
+        
+        // Staggered delays
+        const delay = Math.random() * 4;
+        particle.style.animationDelay = `${delay}s`;
+        
+        // Random opacity
+        particle.style.opacity = Math.random() * 0.5 + 0.5;
+    });
+    
+    // Add pulse effect to the portal with subtle randomness
+    if (portalLight) {
+        // Random pulse timing
+        const pulseDuration = Math.random() * 1 + 3.5;
+        portalLight.style.animationDuration = `${pulseDuration}s`;
+    }
+    
+    // Make portal elements more integrated with the background
+    const portalContainer = document.querySelector('.portal-container');
+    if (portalContainer) {
+        // Add slight shadow to container
+        portalContainer.style.boxShadow = 'none';
+        
+        // Ensure gradient background blends well
+        const gradientBg = document.querySelector('.gradient-background');
+        if (gradientBg) {
+            gradientBg.style.mixBlendMode = 'soft-light';
+        }
+    }
+} 
