@@ -70,57 +70,130 @@ document.addEventListener('DOMContentLoaded', () => {
     const testimonialCards = document.querySelectorAll('.testimonial-card');
     const prevBtn = document.querySelector('.prev-btn');
     const nextBtn = document.querySelector('.next-btn');
-    const dots = document.querySelectorAll('.testimonial-dots .dot');
+    const dotsContainer = document.querySelector('.testimonial-dots');
     
     if (testimonialSlider && testimonialCards.length) {
         let currentSlide = 0;
-        const maxSlide = testimonialCards.length - 1;
+        let maxVisibleSlides = 3; // Default for desktop
+        const totalSlides = testimonialCards.length;
+        let isTransitioning = false;
+        let autoplayTimer;
+        let dots = [];
+        
+        // Function to generate the dots
+        function generateDots() {
+            // Clear existing dots
+            dotsContainer.innerHTML = '';
+            dots = [];
+            
+            // Add new dots based on the number of slides
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('span');
+                dot.classList.add('dot');
+                if (i === currentSlide) {
+                    dot.classList.add('active');
+                }
+                
+                dot.addEventListener('click', () => {
+                    if (!isTransitioning && currentSlide !== i) {
+                        stopAutoplay();
+                        currentSlide = i;
+                        updateSlider();
+                        startAutoplay();
+                    }
+                });
+                
+                dotsContainer.appendChild(dot);
+                dots.push(dot);
+            }
+        }
+        
+        // Function to determine how many slides to show based on screen width
+        function updateVisibleSlides() {
+            if (window.innerWidth < 768) {
+                maxVisibleSlides = 1;
+            } else if (window.innerWidth < 1024) {
+                maxVisibleSlides = 2;
+            } else {
+                maxVisibleSlides = 3;
+            }
+            updateSlider();
+        }
         
         // Initialize the slider
-        updateSlider();
+        generateDots();
+        updateVisibleSlides();
+        
+        // Start autoplay
+        startAutoplay();
         
         // Add click events to navigation buttons
         if (prevBtn) {
             prevBtn.addEventListener('click', () => {
-                currentSlide = currentSlide === 0 ? maxSlide : currentSlide - 1;
-                updateSlider();
+                if (!isTransitioning) {
+                    stopAutoplay();
+                    navigateSlider('prev');
+                    startAutoplay();
+                }
             });
         }
         
         if (nextBtn) {
             nextBtn.addEventListener('click', () => {
-                currentSlide = currentSlide === maxSlide ? 0 : currentSlide + 1;
-                updateSlider();
+                if (!isTransitioning) {
+                    stopAutoplay();
+                    navigateSlider('next');
+                    startAutoplay();
+                }
             });
         }
         
-        // Add click events to dots
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => {
-                currentSlide = index;
-                updateSlider();
-            });
-        });
+        // Pause autoplay on hover
+        testimonialSlider.addEventListener('mouseenter', stopAutoplay);
+        testimonialSlider.addEventListener('mouseleave', startAutoplay);
+        
+        function navigateSlider(direction) {
+            if (direction === 'next') {
+                currentSlide = (currentSlide + 1) % totalSlides;
+            } else {
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            }
+            updateSlider();
+        }
         
         function updateSlider() {
-            // On mobile, stack cards vertically
-            if (window.innerWidth < 768) {
-                testimonialCards.forEach((card, index) => {
-                    card.style.display = index === currentSlide ? 'block' : 'none';
-                });
-            } else {
-                // On desktop, scroll horizontally
-                testimonialSlider.style.transform = `translateX(-${currentSlide * 100 / testimonialCards.length}%)`;
-            }
+            isTransitioning = true;
+            
+            // Calculate the percentage to move based on visible slides
+            const slidePercentage = 100 / Math.min(totalSlides, maxVisibleSlides);
+            const translateValue = currentSlide * slidePercentage;
+            
+            testimonialSlider.style.transform = `translateX(-${translateValue}%)`;
             
             // Update active dot
             dots.forEach((dot, index) => {
                 dot.classList.toggle('active', index === currentSlide);
             });
+            
+            // Reset transitioning flag after animation completes
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 500); // Match this with CSS transition time
+        }
+        
+        function startAutoplay() {
+            stopAutoplay();
+            autoplayTimer = setInterval(() => {
+                navigateSlider('next');
+            }, 5000);
+        }
+        
+        function stopAutoplay() {
+            clearInterval(autoplayTimer);
         }
         
         // Update slider when window is resized
-        window.addEventListener('resize', updateSlider);
+        window.addEventListener('resize', updateVisibleSlides);
     }
 
     // Add hover animations to buttons and interactive elements
