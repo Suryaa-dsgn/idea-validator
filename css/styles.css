@@ -849,6 +849,11 @@ section {
     flex-shrink: 0;
 }
 
+/* Add rotation for the phone icon */
+.info-icon .fa-phone-alt {
+    transform: scaleX(-1); /* This flips the icon horizontally (180 degrees) */
+}
+
 .info-content h4 {
     margin-bottom: var(--spacing-xs);
 }
