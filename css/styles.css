@@ -1276,16 +1276,17 @@ footer {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 75%;
-    max-width: 320px;
+    width: 100%;
     height: 100vh;
-    background-color: var(--white);
-    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 1001;
     transition: right 0.3s ease-in-out;
     display: flex;
     flex-direction: column;
-    padding: var(--spacing-lg);
+    justify-content: space-between;
+    padding: var(--spacing-xl) var(--spacing-lg);
     overflow-y: auto;
 }
 
@@ -1300,31 +1301,61 @@ footer {
     margin-bottom: var(--spacing-xl);
 }
 
+.mobile-menu-header .logo {
+    font-size: 1.75rem;
+}
+
+.mobile-menu-header .logo img {
+    height: 48px;
+}
+
 .mobile-menu-close {
     background: none;
     border: none;
     color: var(--primary-color);
     font-size: 1.5rem;
     cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+}
+
+.mobile-menu-close:hover {
+    background-color: rgba(99, 102, 241, 0.1);
 }
 
 .mobile-nav-links {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-lg) var(--spacing-md);
 }
 
 .mobile-nav-links a {
     color: var(--dark);
     text-decoration: none;
-    padding: var(--spacing-md) 0;
-    font-size: 1.125rem;
+    padding: var(--spacing-lg) 0;
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
     transition: color 0.3s ease;
-    border-bottom: 1px solid var(--primary-light);
+    border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease;
 }
 
 .mobile-nav-links a:hover {
     color: var(--primary-color);
+}
+
+.mobile-nav-links a.appear {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .mobile-auth-buttons {
@@ -1332,6 +1363,25 @@ footer {
     flex-direction: column;
     gap: var(--spacing-md);
     margin-top: auto;
+    padding: var(--spacing-lg) var(--spacing-md) var(--spacing-xxl);
+}
+
+.mobile-auth-buttons .btn {
+    width: 100%;
+    padding: var(--spacing-md);
+    font-size: 1.1rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mobile-auth-buttons .btn.appear {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.mobile-auth-buttons .btn-primary {
+    margin-top: var(--spacing-sm);
 }
 
 /* Add overlay when mobile menu is active */

@@ -30,11 +30,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
     
     if (mobileMenuBtn) {
-        // Function to open mobile menu
+        // Function to open mobile menu with staggered animations
         function openMobileMenu() {
             mobileMenu.classList.add('active');
             mobileMenuOverlay.classList.add('active');
             document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+            
+            // Animate menu items with staggered delay
+            mobileNavLinks.forEach((link, index) => {
+                setTimeout(() => {
+                    link.classList.add('appear');
+                }, 100 + (index * 100));
+            });
+            
+            // Animate auth buttons
+            const authButtons = mobileMenu.querySelectorAll('.mobile-auth-buttons .btn');
+            authButtons.forEach((btn, index) => {
+                setTimeout(() => {
+                    btn.classList.add('appear');
+                }, 500 + (index * 100));
+            });
         }
 
         // Function to close mobile menu
@@ -42,6 +57,16 @@ document.addEventListener('DOMContentLoaded', () => {
             mobileMenu.classList.remove('active');
             mobileMenuOverlay.classList.remove('active');
             document.body.style.overflow = ''; // Restore scrolling
+            
+            // Reset animations
+            mobileNavLinks.forEach(link => {
+                link.classList.remove('appear');
+            });
+            
+            const authButtons = mobileMenu.querySelectorAll('.mobile-auth-buttons .btn');
+            authButtons.forEach(btn => {
+                btn.classList.remove('appear');
+            });
         }
 
         // Event listeners
