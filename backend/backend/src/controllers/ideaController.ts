@@ -4,6 +4,8 @@ import { AIService } from '../services/aiService';
 import { AppError } from '../middleware/errorHandler';
 import { logger } from '../utils/logger';
 import mongoose from 'mongoose';
+import { emailService } from '../utils/emailService';
+import User from '../models/user';
 
 /**
  * @desc    Get all ideas for current user
@@ -287,6 +289,59 @@ export const getPublicIdeas = async (
     });
   } catch (error) {
     logger.error('Get public ideas error:', error);
+    next(error);
+  }
+};
+
+/**
+ * @desc    Email a validation report to the user
+ * @route   POST /api/ideas/:id/email-report
+ * @access  Private
+ */
+export const emailValidationReport = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const ideaId = req.params.id;
+    
+    // Find the idea
+    const idea = await Idea.findById(ideaId);
+    
+    if (!idea) {
+      return next(new AppError('Idea not found', 404));
+    }
+    
+    // Check if user owns this idea
+    if (idea.user.toString() !== req.user.id) {
+      return next(new AppError('Not authorized to access this idea', 401));
+    }
+    
+    // Get the user's email
+    const user = await User.findById(req.user.id);
+    
+    if (!user) {
+      return next(new AppError('User not found', 404));
+    }
+    
+    // Generate report URL
+    const reportUrl = `${req.protocol}://${req.get('host')}/dashboard/ideas/${ideaId}`;
+    
+    // Send email with validation report
+    await emailService.sendValidationReportEmail(
+      user.email,
+      idea.title,
+      idea.validationScore,
+      reportUrl
+    );
+    
+    res.status(200).json({
+      success: true,
+      message: 'Validation report email sent successfully',
+    });
+  } catch (error) {
+    logger.error('Error sending validation report email:', error);
     next(error);
   }
 }; 

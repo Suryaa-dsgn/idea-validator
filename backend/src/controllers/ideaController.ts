@@ -13,9 +13,9 @@ import User from '../models/user';
  * @access  Private
  */
 export const getIdeas = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
+  req: any,
+  res: any,
+  next: any
 ) => {
   try {
     const ideas = await Idea.find({ user: req.user.id }).sort('-createdAt');
@@ -37,9 +37,9 @@ export const getIdeas = async (
  * @access  Private
  */
 export const getIdea = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
+  req: any,
+  res: any,
+  next: any
 ) => {
   try {
     const idea = await Idea.findById(req.params.id);
@@ -72,9 +72,9 @@ export const getIdea = async (
  * @access  Private
  */
 export const createIdea = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
+  req: any,
+  res: any,
+  next: any
 ) => {
   try {
     // Add user to req.body
@@ -106,9 +106,9 @@ export const createIdea = async (
  * @access  Private
  */
 export const updateIdea = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
+  req: any,
+  res: any,
+  next: any
 ) => {
   try {
     let idea = await Idea.findById(req.params.id);
@@ -152,9 +152,9 @@ export const updateIdea = async (
  * @access  Private
  */
 export const deleteIdea = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
+  req: any,
+  res: any,
+  next: any
 ) => {
   try {
     const idea = await Idea.findById(req.params.id);
@@ -189,9 +189,9 @@ export const deleteIdea = async (
  * @access  Private
  */
 export const validateIdea = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
+  req: any,
+  res: any,
+  next: any
 ) => {
   try {
     const idea = await Idea.findById(req.params.id);
@@ -248,15 +248,10 @@ export const validateIdea = async (
           idea.status = 'draft';
           await idea.save();
         }
-      } catch (saveError) {
-        logger.error('Error resetting idea status:', saveError);
+      } catch (updateError) {
+        logger.error('Error updating idea status after validation fail:', updateError);
       }
     }
-    
-    if (error instanceof mongoose.Error.CastError) {
-      return next(new AppError('Idea not found', 404));
-    }
-    
     next(error);
   }
 };

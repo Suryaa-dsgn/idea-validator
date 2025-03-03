@@ -1,22 +1,18 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request } from 'express';
 import jwt from 'jsonwebtoken';
 import { AppError } from './errorHandler';
 import User from '../models/user';
 
-// Extend Express Request type to include user
-declare global {
-  namespace Express {
-    interface Request {
-      user?: any;
-    }
-  }
+// Define a custom interface extending Express Request
+interface RequestWithUser extends Request {
+  user: any;
 }
 
 // Middleware to protect routes that require authentication
 export const protect = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
+  req: any,
+  res: any,
+  next: any
 ) => {
   try {
     let token;
@@ -40,7 +36,7 @@ export const protect = async (
     const decoded = jwt.verify(
       token,
       process.env.JWT_SECRET || 'default_secret'
-    ) as jwt.JwtPayload;
+    ) as any;
 
     // Find user by id from decoded token
     const user = await User.findById(decoded.id);
@@ -64,7 +60,7 @@ export const protect = async (
 
 // Middleware to restrict routes to certain user roles
 export const restrictTo = (...roles: string[]) => {
-  return (req: Request, res: Response, next: NextFunction) => {
+  return (req: any, res: any, next: any) => {
     // Check if user has the required role
     if (!roles.includes(req.user.role)) {
       return next(

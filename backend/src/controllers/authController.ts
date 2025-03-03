@@ -11,9 +11,9 @@ import crypto from 'crypto';
  * @access  Public
  */
 export const register = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
+  req: any,
+  res: any,
+  next: any
 ) => {
   try {
     const { name, email, password } = req.body;
@@ -54,9 +54,9 @@ export const register = async (
  * @access  Public
  */
 export const login = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
+  req: any,
+  res: any,
+  next: any
 ) => {
   try {
     const { email, password } = req.body;
@@ -94,9 +94,9 @@ export const login = async (
  * @access  Private
  */
 export const getMe = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
+  req: any,
+  res: any,
+  next: any
 ) => {
   try {
     // Get user from req (set by auth middleware)
@@ -117,7 +117,7 @@ export const getMe = async (
  * @route   GET /api/auth/logout
  * @access  Private
  */
-export const logout = (req: Request, res: Response) => {
+export const logout = (req: any, res: any) => {
   res.status(200).json({
     success: true,
     message: 'Successfully logged out',
@@ -130,9 +130,9 @@ export const logout = (req: Request, res: Response) => {
  * @access  Public
  */
 export const forgotPassword = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
+  req: any,
+  res: any,
+  next: any
 ) => {
   try {
     const { email } = req.body;
@@ -190,7 +190,7 @@ export const forgotPassword = async (
 /**
  * Helper function to get token from model, create cookie and send response
  */
-const sendTokenResponse = (user: any, statusCode: number, res: Response) => {
+const sendTokenResponse = (user: any, statusCode: number, res: any) => {
   // Create token
   const token = user.getSignedJwtToken();
 

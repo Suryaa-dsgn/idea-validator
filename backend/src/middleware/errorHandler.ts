@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import { logger } from '../utils/logger';
 
 // Custom error class for API errors
@@ -15,12 +15,17 @@ export class AppError extends Error {
   }
 }
 
+// Types for MongoDB errors
+interface MongoError extends Error {
+  code?: number;
+}
+
 // Error handler middleware
 export const errorHandler = (
-  err: Error | AppError,
+  err: Error | AppError | MongoError,
   req: Request,
-  res: Response,
-  next: NextFunction
+  res: any,
+  next: any
 ) => {
   // Log the error
   logger.error(`${err.name}: ${err.message}`, { stack: err.stack });
@@ -45,7 +50,7 @@ export const errorHandler = (
   }
 
   // Mongoose duplicate key error
-  if (err.name === 'MongoError' && (err as any).code === 11000) {
+  if (err.name === 'MongoError' && (err as MongoError).code === 11000) {
     statusCode = 400;
     message = 'Duplicate field value entered';
     isOperational = true;

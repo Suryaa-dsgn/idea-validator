@@ -1,4 +1,4 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
 import authRoutes from './authRoutes';
 import ideaRoutes from './ideaRoutes';
 
@@ -16,7 +16,7 @@ export const setupRoutes = (app: any) => {
   app.use(`${API_PREFIX}/ideas`, ideaRoutes);
 
   // Health check route
-  app.get('/health', (req: Request, res: Response) => {
+  app.get('/health', (_req: any, res: any) => {
     res.status(200).json({
       success: true,
       message: 'API is running',
@@ -26,7 +26,7 @@ export const setupRoutes = (app: any) => {
   });
 
   // 404 route for API
-  app.use(`${API_PREFIX}/*`, (req: Request, res: Response) => {
+  app.use(`${API_PREFIX}/*`, (_req: any, res: any) => {
     res.status(404).json({
       success: false,
       message: 'API route not found',
