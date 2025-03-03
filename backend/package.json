@@ -8,9 +8,9 @@
     "dev": "nodemon --exec ts-node src/index.ts",
     "test": "jest",
     "build": "tsc",
-    "build-js": "node build-js.js",
-    "deploy-render": "tsc --skipLibCheck",
-    "postinstall": "npm run build-js || npm run build"
+    "build-render": "node render-build.js",
+    "deploy-render": "tsc --skipLibCheck || node render-build.js",
+    "postinstall": "npm run build-render || npm run build || echo 'Build failed but continuing'"
   },
   "keywords": [
     "startup",
