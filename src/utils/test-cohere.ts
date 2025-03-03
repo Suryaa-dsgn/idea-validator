@@ -14,7 +14,7 @@ async function testCohere() {
         console.log('Attempting to generate text...');
         const response = await cohere.generate({
             prompt: 'Write a short test message.',
-            max_tokens: 20,
+            maxTokens: 20,
             temperature: 0.7,
             model: 'command',
         });

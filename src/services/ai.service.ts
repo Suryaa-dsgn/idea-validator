@@ -31,7 +31,7 @@ class AIService {
             const response = await this.cohere.generate({
                 model: process.env.COHERE_MODEL || 'command',
                 prompt,
-                max_tokens: 300,
+                maxTokens: 300,
                 temperature: 0.7,
             });
             return response.generations[0].text;
@@ -51,7 +51,7 @@ class AIService {
             const response = await this.cohere.generate({
                 model: process.env.COHERE_MODEL || 'command',
                 prompt: `Analyze the sentiment of this text and respond with exactly one word - either 'positive', 'negative', or 'neutral': "${text}"`,
-                max_tokens: 10,
+                maxTokens: 10,
                 temperature: 0.3,
             });
             return response.generations[0].text.trim().toLowerCase();
@@ -69,7 +69,7 @@ class AIService {
             const response = await this.cohere.generate({
                 model: process.env.COHERE_MODEL || 'command',
                 prompt: `Analyze this startup idea and provide constructive feedback: ${idea}`,
-                max_tokens: 500,
+                maxTokens: 500,
                 temperature: 0.7,
             });
             return response.generations[0].text;
@@ -87,7 +87,7 @@ class AIService {
             const response = await this.cohere.generate({
                 model: process.env.COHERE_MODEL || 'command',
                 prompt: `Provide market insights and trends for the ${industry} industry`,
-                max_tokens: 500,
+                maxTokens: 500,
                 temperature: 0.7,
             });
             return response.generations[0].text;

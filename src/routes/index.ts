@@ -1,11 +1,12 @@
-import { Express, Request, Response } from 'express';
+import { Router } from 'express';
+import { Request, Response } from 'express-serve-static-core';
 import authRoutes from './authRoutes';
 import ideaRoutes from './ideaRoutes';
 
 /**
  * Setup all API routes
  */
-export const setupRoutes = (app: Express) => {
+export const setupRoutes = (app: any) => {
   // API route prefix
   const API_PREFIX = '/api';
 
@@ -16,7 +17,7 @@ export const setupRoutes = (app: Express) => {
   app.use(`${API_PREFIX}/ideas`, ideaRoutes);
 
   // Health check route
-  app.get('/health', (req: Request, res: Response) => {
+  app.get('/health', (_req: Request, res: Response) => {
     res.status(200).json({
       success: true,
       message: 'API is running',
@@ -26,7 +27,7 @@ export const setupRoutes = (app: Express) => {
   });
 
   // 404 route for API
-  app.use(`${API_PREFIX}/*`, (req: Request, res: Response) => {
+  app.use(`${API_PREFIX}/*`, (_req: Request, res: Response) => {
     res.status(404).json({
       success: false,
       message: 'API route not found',
