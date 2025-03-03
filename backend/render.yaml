@@ -1,0 +1,17 @@
+# Render configuration file
+services:
+  - type: web
+    name: idea-validator-api
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && node render-start.js
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: NODE_ENV
+        value: production
+    healthCheckPath: /
+    # Explicitly set the port that Render should expect
+    port: 10000 
