@@ -8,6 +8,8 @@ export interface IUser extends mongoose.Document {
   email: string;
   password: string;
   role: string;
+  resetPasswordToken?: string;
+  resetPasswordExpire?: Date;
   createdAt: Date;
   updatedAt: Date;
   comparePassword(enteredPassword: string): Promise<boolean>;
@@ -20,6 +22,8 @@ interface UserDocument extends mongoose.Document {
   email: string;
   password: string;
   role: string;
+  resetPasswordToken?: string;
+  resetPasswordExpire?: Date;
   isModified(path: string): boolean;
   comparePassword(enteredPassword: string): Promise<boolean>;
   getSignedJwtToken(): string;
@@ -55,6 +59,8 @@ const UserSchema = new mongoose.Schema(
       enum: ['user', 'admin'],
       default: 'user',
     },
+    resetPasswordToken: String,
+    resetPasswordExpire: Date,
   },
   {
     timestamps: true,

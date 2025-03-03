@@ -7,6 +7,7 @@ import {
   deleteIdea,
   validateIdea,
   getPublicIdeas,
+  emailValidationReport
 } from '../controllers/ideaController';
 import { protect } from '../middleware/auth';
 
@@ -30,5 +31,6 @@ router.route('/:id')
 
 // Idea validation
 router.post('/:id/validate', validateIdea);
+router.post('/:id/email-report', emailValidationReport);
 
 export default router;

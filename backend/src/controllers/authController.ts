@@ -2,6 +2,8 @@ import { Request, Response, NextFunction } from 'express';
 import User from '../models/user';
 import { AppError } from '../middleware/errorHandler';
 import { logger } from '../utils/logger';
+import { emailService } from '../utils/emailService';
+import crypto from 'crypto';
 
 /**
  * @desc    Register a new user
@@ -30,7 +32,15 @@ export const register = async (
       password,
     });
 
-    // Send JWT token
+    // Send welcome email
+    try {
+      await emailService.sendWelcomeEmail(name, email);
+    } catch (error) {
+      // Log error but don't fail registration if email fails
+      logger.error('Failed to send welcome email:', error);
+    }
+
+    // Send token response
     sendTokenResponse(user, 201, res);
   } catch (error) {
     logger.error('Registration error:', error);
@@ -112,6 +122,69 @@ export const logout = (req: Request, res: Response) => {
     success: true,
     message: 'Successfully logged out',
   });
+};
+
+/**
+ * @desc    Forgot password
+ * @route   POST /api/auth/forgot-password
+ * @access  Public
+ */
+export const forgotPassword = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { email } = req.body;
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return next(new AppError('No user found with that email', 404));
+    }
+
+    // Generate reset token
+    const resetToken = crypto.randomBytes(32).toString('hex');
+    
+    // Hash token and set to resetPasswordToken field
+    const resetPasswordToken = crypto
+      .createHash('sha256')
+      .update(resetToken)
+      .digest('hex');
+    
+    // Set expire time (1 hour)
+    const resetPasswordExpire = new Date(Date.now() + 3600000);
+    
+    // Update user with reset token info
+    await User.findByIdAndUpdate(user.id, {
+      resetPasswordToken,
+      resetPasswordExpire,
+    });
+
+    // Create reset URL
+    const resetUrl = `${req.protocol}://${req.get('host')}/reset-password`;
+    
+    try {
+      // Send email with reset token
+      await emailService.sendPasswordResetEmail(email, resetToken, resetUrl);
+      
+      res.status(200).json({
+        success: true,
+        message: 'Password reset email sent',
+      });
+    } catch (error) {
+      // If email fails, remove reset token from user
+      await User.findByIdAndUpdate(user.id, {
+        resetPasswordToken: undefined,
+        resetPasswordExpire: undefined,
+      });
+      
+      logger.error('Error sending password reset email:', error);
+      return next(new AppError('Email could not be sent', 500));
+    }
+  } catch (error) {
+    next(error);
+  }
 };
 
 /**
