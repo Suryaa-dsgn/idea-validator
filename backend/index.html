@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IdeaValidator - AI-Powered Startup Idea Validation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <img src="images/logo.svg" alt="IdeaValidator Logo">
+                    <span>IdeaValidator</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#about">About</a>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#testimonials">Success Stories</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="auth-buttons">
+                    <button class="btn btn-secondary">Log In</button>
+                    <button class="btn btn-primary">Sign Up</button>
+                </div>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </nav>
+        <div class="mobile-menu">
+            <div class="mobile-menu-header">
+                <div class="logo">
+                    <img src="images/logo.svg" alt="IdeaValidator Logo">
+                    <span>IdeaValidator</span>
+                </div>
+                <button class="mobile-menu-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="mobile-nav-links">
+                <a href="#about">About</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#testimonials">Success Stories</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="mobile-auth-buttons">
+                <button class="btn btn-secondary">Log In</button>
+                <button class="btn btn-primary">Sign Up</button>
+            </div>
+        </div>
+    </header>
+    <div class="mobile-menu-overlay"></div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="animate-text">Transform Your Startup Ideas into Reality with AI</h1>
+                    <p>Get instant, data-driven validation for your startup concepts. No more guesswork, just actionable insights to help you build with confidence.</p>
+                    <div class="idea-input-container">
+                        <input type="text" placeholder="Enter your startup idea..." class="idea-input">
+                        <button class="btn btn-primary validate-btn">
+                            <span>Validate My Idea</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">5,000+</span>
+                            <span class="stat-label">Ideas Validated</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">87%</span>
+                            <span class="stat-label">Accuracy Rate</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">2,300+</span>
+                            <span class="stat-label">Happy Founders</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="animation-container">
+                        <img src="images/hero-illustration.svg" alt="AI Idea Validation" class="main-image">
+                        <div class="floating-elements">
+                            <div class="element element-1">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <div class="element element-2">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="element element-3">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wave-divider">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                    <path fill="#f8f9fa" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,149.3C960,160,1056,160,1152,138.7C1248,117,1344,75,1392,53.3L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                </svg>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <div class="section-header">
+                    <h2>What We Do</h2>
+                    <p>We help entrepreneurs validate their startup ideas with AI-powered insights</p>
+                </div>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Your AI-Powered Idea Companion</h3>
+                        <p>IdeaValidator uses advanced AI to analyze your startup concept against market trends, competitor data, and consumer behavior patterns. We don't just tell you if your idea might work—we show you <em>why</em> and <em>how</em> to make it better.</p>
+                        <div class="feature-list">
+                            <div class="feature">
+                                <div class="feature-icon">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <div class="feature-text">
+                                    <h4>Data-Driven Insights</h4>
+                                    <p>Access market analysis based on real-time data from multiple sources.</p>
+                                </div>
+                            </div>
+                            <div class="feature">
+                                <div class="feature-icon">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+                                <div class="feature-text">
+                                    <h4>Instant Feedback</h4>
+                                    <p>Get comprehensive validation reports in seconds, not days or weeks.</p>
+                                </div>
+                            </div>
+                            <div class="feature">
+                                <div class="feature-icon">
+                                    <i class="fas fa-route"></i>
+                                </div>
+                                <div class="feature-text">
+                                    <h4>Actionable Roadmaps</h4>
+                                    <p>Receive step-by-step guidance on how to refine and launch your idea.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-image">
+                        <img src="images/about-illustration.svg" alt="AI Assistant" class="illustration">
+                        <div class="pulse-effect"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section id="how-it-works" class="how-it-works">
+            <div class="container">
+                <div class="section-header">
+                    <h2>How It Works</h2>
+                    <p>Three simple steps to validate your startup idea</p>
+                </div>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fas fa-pencil-alt"></i>
+                            </div>
+                            <h3>Describe Your Idea</h3>
+                            <p>Tell us about your startup concept. The more details you provide, the more accurate our analysis will be.</p>
+                        </div>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h3>AI Analysis</h3>
+                            <p>Our AI engine analyzes your idea against market data, trends, and competitive landscape in real-time.</p>
+                        </div>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <h3>Get Your Report</h3>
+                            <p>Receive a comprehensive validation report with actionable insights and next steps for your journey.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="demo-container">
+                    <div class="demo-screen">
+                        <div class="demo-header">
+                            <div class="demo-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <div class="demo-title">Idea Validation Report</div>
+                        </div>
+                        <div class="demo-content">
+                            <div class="demo-result">
+                                <div class="result-header">
+                                    <h4>Market Viability Score</h4>
+                                    <div class="score">78<span>%</span></div>
+                                </div>
+                                <div class="result-details">
+                                    <div class="result-item">
+                                        <span class="item-label">Market Size</span>
+                                        <div class="progress-bar">
+                                            <div class="progress" style="width: 85%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="result-item">
+                                        <span class="item-label">Competition</span>
+                                        <div class="progress-bar">
+                                            <div class="progress" style="width: 65%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="result-item">
+                                        <span class="item-label">Innovation Factor</span>
+                                        <div class="progress-bar">
+                                            <div class="progress" style="width: 92%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="result-item">
+                                        <span class="item-label">Execution Complexity</span>
+                                        <div class="progress-bar">
+                                            <div class="progress" style="width: 70%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- User Portal Section -->
+        <section class="user-portal">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Join Our Community</h2>
+                    <p>Connect with founders who are transforming their ideas into reality</p>
+                </div>
+                <div class="portal-container">
+                    <div class="portal-base">
+                        <div class="portal-ring"></div>
+                        <div class="portal-light"></div>
+                    </div>
+                    <div class="floating-avatars">
+                        <div class="avatar avatar-1">
+                            <img src="images/Avatar Image 1.png" alt="User avatar">
+                        </div>
+                        <div class="avatar avatar-2">
+                            <img src="images/Avatar Image 2.png" alt="User avatar">
+                        </div>
+                        <div class="avatar avatar-3">
+                            <img src="images/Avatar Image 3.png" alt="User avatar">
+                        </div>
+                        <div class="avatar avatar-4">
+                            <img src="images/Avatar Image 4.png" alt="User avatar">
+                        </div>
+                        <div class="avatar avatar-5">
+                            <img src="images/Avatar Image 5.png" alt="User avatar">
+                        </div>
+                        <div class="avatar avatar-6">
+                            <img src="images/Avatar Image 6.png" alt="User avatar">
+                        </div>
+                        <div class="avatar avatar-7">
+                            <img src="images/Avatar Image 7.png" alt="User avatar">
+                        </div>
+                        <div class="avatar avatar-8">
+                            <img src="images/Avatar Image 8.png" alt="User avatar">
+                        </div>
+                    </div>
+                    <div class="gradient-background"></div>
+                    <div class="particles-container">
+                        <div class="particle particle-1"></div>
+                        <div class="particle particle-2"></div>
+                        <div class="particle particle-3"></div>
+                        <div class="particle particle-4"></div>
+                        <div class="particle particle-5"></div>
+                        <div class="particle particle-6"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="testimonials">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Success Stories</h2>
+                    <p>Hear from founders who validated their ideas with us</p>
+                </div>
+                <div class="testimonial-slider">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>IdeaValidator helped me pivot my SaaS concept before I wasted months of development. The market insights were spot-on and saved me from a costly mistake.</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="images/Avatar Image 1.png" alt="Sarah Johnson" class="author-image">
+                            <div class="author-info">
+                                <h4>Sarah Johnson</h4>
+                                <p>Founder, DataSync</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>The validation report gave me the confidence to pitch my idea to investors. We secured $1.2M in seed funding, and our investors were impressed by the data-backed approach.</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="images/Avatar Image 2.png" alt="Jessica Pearson" class="author-image">
+                            <div class="author-info">
+                                <h4>Jessica Pearson</h4>
+                                <p>CEO, GreenTech Solutions</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>As a non-technical founder, I was struggling to validate my marketplace idea. IdeaValidator provided clear, actionable insights that helped me find the right technical co-founder.</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="images/Avatar Image 3.png" alt="Suryakanta Jena" class="author-image">
+                            <div class="author-info">
+                                <h4>Suryakanta Jena</h4>
+                                <p>Founder, LocalCraft Marketplace</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>Within weeks of using IdeaValidator, I identified a critical gap in my fintech product. This insight helped me reposition my offering and we're now serving a more profitable customer segment.</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="images/Avatar Image 4.png" alt="David Rodriguez" class="author-image">
+                            <div class="author-info">
+                                <h4>David Rodriguez</h4>
+                                <p>Founder, PaymentFlow</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>My e-commerce idea seemed solid, but IdeaValidator highlighted serious logistical challenges I hadn't considered. I was able to address these early, saving me from potential disaster later.</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="images/Avatar Image 5.png" alt="Emily Wang" class="author-image">
+                            <div class="author-info">
+                                <h4>Emily Wang</h4>
+                                <p>Founder, EcoGoods</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>After three failed startups, I used IdeaValidator before building anything. The competitive analysis alone was worth the investment. Now, 18 months in, we're growing steadily and profitable.</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="images/Avatar Image 6.png" alt="Rachel Jain" class="author-image">
+                            <div class="author-info">
+                                <h4>Rachel Jain</h4>
+                                <p>CEO, Analytics Pro</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>The market sizing feature blew me away. I discovered my addressable market was 3x larger than I'd estimated. This data helped me raise funding at a valuation far beyond what I expected.</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="images/Avatar Image 7.png" alt="Mike Ross" class="author-image">
+                            <div class="author-info">
+                                <h4>Mike Ross</h4>
+                                <p>CEO, HealthTech Innovations</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p>I was skeptical about AI validation, but the depth of insights was incredible. IdeaValidator identified a regulatory issue that would have killed my fintech startup before it launched.</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="images/Avatar Image 8.png" alt="Dona Paulson" class="author-image">
+                            <div class="author-info">
+                                <h4>Dona Paulson</h4>
+                                <p>Founder, SecurePay</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-controls">
+                    <button class="control-btn prev-btn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="testimonial-dots">
+                        <!-- Dots will be generated dynamically -->
+                    </div>
+                    <button class="control-btn next-btn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Us Section -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Let's Chat</h2>
+                    <p>Got a wild idea? Questions about our process? We'd love to hear from you!</p>
+                </div>
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Email Us</h4>
+                                <p>hello@ideavalidator.ai</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Visit Us</h4>
+                                <p>123 Innovation Street<br>San Francisco, CA 94103</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Call Us</h4>
+                                <p>(555) 123-4567</p>
+                            </div>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        </div>
+                    </div>
+                    <div class="contact-form">
+                        <form>
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" placeholder="What should we call you?">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" placeholder="Where can we reach you?">
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Your Message</label>
+                                <textarea id="message" placeholder="Tell us what's on your mind..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <span>Send Message</span>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Ready to Validate Your Startup Idea?</h2>
+                    <p>Join thousands of founders who've used IdeaValidator to build successful startups.</p>
+                    <button class="btn btn-cta">Get Started for Free</button>
+                </div>
+                <div class="floating-shapes">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                    <div class="shape shape-3"></div>
+                    <div class="shape shape-4"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/logo.svg" alt="IdeaValidator Logo">
+                    <span>IdeaValidator</span>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Product</h4>
+                        <a href="#">Features</a>
+                        <a href="#">Pricing</a>
+                        <a href="#">Case Studies</a>
+                        <a href="#">Documentation</a>
+                    </div>
+                    <div class="link-group">
+                        <h4>Company</h4>
+                        <a href="#">About Us</a>
+                        <a href="#">Careers</a>
+                        <a href="#">Blog</a>
+                        <a href="#">Press</a>
+                    </div>
+                    <div class="link-group">
+                        <h4>Legal</h4>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">GDPR</a>
+                    </div>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Stay in the Loop</h4>
+                    <p>Get the latest updates and founder tips.</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Your email address">
+                        <button class="btn btn-secondary">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 IdeaValidator. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/animations.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html> 
