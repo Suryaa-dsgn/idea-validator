@@ -1,0 +1,215 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+    <!-- Gradients and Patterns -->
+    <defs>
+        <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f8fafc" />
+            <stop offset="100%" stop-color="#e2e8f0" />
+        </linearGradient>
+        
+        <linearGradient id="primary-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#6366f1" />
+            <stop offset="100%" stop-color="#8b5cf6" />
+        </linearGradient>
+        
+        <linearGradient id="secondary-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#10b981" />
+            <stop offset="100%" stop-color="#0ea5e9" />
+        </linearGradient>
+        
+        <linearGradient id="accent-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f97316" />
+            <stop offset="100%" stop-color="#ef4444" />
+        </linearGradient>
+        
+        <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="10" />
+            <feOffset dx="0" dy="10" result="offsetblur" />
+            <feComponentTransfer>
+                <feFuncA type="linear" slope="0.2" />
+            </feComponentTransfer>
+            <feMerge>
+                <feMergeNode />
+                <feMergeNode in="SourceGraphic" />
+            </feMerge>
+        </filter>
+        
+        <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+            <rect width="20" height="20" fill="none" />
+            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#e2e8f0" stroke-width="1" />
+        </pattern>
+    </defs>
+    
+    <!-- Background Elements -->
+    <rect width="800" height="600" fill="url(#bg-gradient)" />
+    <rect width="800" height="600" fill="url(#grid)" opacity="0.4" />
+    
+    <!-- Central Screen/Dashboard -->
+    <rect x="200" y="100" width="400" height="300" rx="20" fill="white" filter="url(#shadow)" />
+    
+    <!-- Screen Header -->
+    <rect x="200" y="100" width="400" height="50" rx="20" fill="url(#primary-gradient)" />
+    <rect x="200" y="130" width="400" height="20" rx="0" fill="url(#primary-gradient)" />
+    
+    <!-- Screen Dots -->
+    <circle cx="230" cy="125" r="6" fill="#ff5f57" />
+    <circle cx="250" cy="125" r="6" fill="#febc2e" />
+    <circle cx="270" cy="125" r="6" fill="#28c840" />
+    
+    <!-- Screen Title -->
+    <text x="400" y="127" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">Idea Validation Report</text>
+    
+    <!-- Idea Input -->
+    <rect x="220" y="170" width="360" height="50" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2" />
+    <text x="240" y="200" font-family="Arial, sans-serif" font-size="14" fill="#64748b">AI-powered travel planner with personalized recommendations</text>
+    
+    <!-- Analysis Result Bars -->
+    <g transform="translate(220, 250)">
+        <!-- Market Viability -->
+        <text x="0" y="15" font-family="Arial, sans-serif" font-size="14" fill="#1e293b" font-weight="bold">Market Viability</text>
+        <rect x="150" y="5" width="200" height="16" rx="8" fill="#f1f5f9" />
+        <rect x="150" y="5" width="170" height="16" rx="8" fill="url(#primary-gradient)" />
+        
+        <!-- Technical Feasibility -->
+        <text x="0" y="45" font-family="Arial, sans-serif" font-size="14" fill="#1e293b" font-weight="bold">Technical Feasibility</text>
+        <rect x="150" y="35" width="200" height="16" rx="8" fill="#f1f5f9" />
+        <rect x="150" y="35" width="190" height="16" rx="8" fill="url(#secondary-gradient)" />
+        
+        <!-- Competitive Landscape -->
+        <text x="0" y="75" font-family="Arial, sans-serif" font-size="14" fill="#1e293b" font-weight="bold">Competitive Landscape</text>
+        <rect x="150" y="65" width="200" height="16" rx="8" fill="#f1f5f9" />
+        <rect x="150" y="65" width="140" height="16" rx="8" fill="url(#accent-gradient)" />
+        
+        <!-- Overall Score -->
+        <g transform="translate(320, 110)">
+            <circle cx="20" cy="20" r="30" fill="none" stroke="#e2e8f0" stroke-width="6" />
+            <circle cx="20" cy="20" r="30" fill="none" stroke="url(#primary-gradient)" stroke-width="6" stroke-dasharray="150, 188.5" />
+            <text x="20" y="25" font-family="Arial, sans-serif" font-size="20" fill="#1e293b" font-weight="bold" text-anchor="middle">82%</text>
+        </g>
+    </g>
+    
+    <!-- Brain/AI Processing Elements -->
+    <g transform="translate(400, 80)" opacity="0.8">
+        <!-- Brain Outline -->
+        <path d="M0,0 Q40,-30 80,0 Q120,-50 160,0 Q120,100 80,120 Q40,100 0,0 Z" fill="none" stroke="url(#primary-gradient)" stroke-width="2" stroke-dasharray="5,5" />
+        
+        <!-- Neural Network Nodes -->
+        <circle cx="40" cy="-10" r="6" fill="#6366f1" />
+        <circle cx="80" cy="-20" r="6" fill="#6366f1" />
+        <circle cx="120" cy="-10" r="6" fill="#6366f1" />
+        <circle cx="20" cy="20" r="6" fill="#6366f1" />
+        <circle cx="60" cy="30" r="6" fill="#6366f1" />
+        <circle cx="100" cy="40" r="6" fill="#6366f1" />
+        <circle cx="140" cy="20" r="6" fill="#6366f1" />
+        <circle cx="40" cy="60" r="6" fill="#6366f1" />
+        <circle cx="80" cy="80" r="6" fill="#6366f1" />
+        <circle cx="120" cy="60" r="6" fill="#6366f1" />
+        
+        <!-- Neural Network Connections -->
+        <line x1="40" y1="-10" x2="80" y2="-20" stroke="#8b5cf6" stroke-width="1" />
+        <line x1="80" y1="-20" x2="120" y2="-10" stroke="#8b5cf6" stroke-width="1" />
+        <line x1="40" y1="-10" x2="20" y2="20" stroke="#8b5cf6" stroke-width="1" />
+        <line x1="40" y1="-10" x2="60" y2="30" stroke="#8b5cf6" stroke-width="1" />
+        <line x1="80" y1="-20" x2="60" y2="30" stroke="#8b5cf6" stroke-width="1" />
+        <line x1="80" y1="-20" x2="100" y2="40" stroke="#8b5cf6" stroke-width="1" />
+        <line x1="120" y1="-10" x2="100" y2="40" stroke="#8b5cf6" stroke-width="1" />
+        <line x1="120" y1="-10" x2="140" y2="20" stroke="#8b5cf6" stroke-width="1" />
+        <line x1="20" y1="20" x2="40" y2="60" stroke="#8b5cf6" stroke-width="1" />
+        <line x1="60" y1="30" x2="40" y2="60" stroke="#8b5cf6" stroke-width="1" />
+        <line x1="60" y1="30" x2="80" y2="80" stroke="#8b5cf6" stroke-width="1" />
+        <line x1="100" y1="40" x2="80" y2="80" stroke="#8b5cf6" stroke-width="1" />
+        <line x1="100" y1="40" x2="120" y2="60" stroke="#8b5cf6" stroke-width="1" />
+        <line x1="140" y1="20" x2="120" y2="60" stroke="#8b5cf6" stroke-width="1" />
+    </g>
+    
+    <!-- Data Elements Flowing In -->
+    <g>
+        <!-- Market Data -->
+        <g transform="translate(100, 150)">
+            <rect x="0" y="0" width="70" height="40" rx="8" fill="#f8fafc" stroke="#6366f1" stroke-width="2" />
+            <text x="35" y="25" font-family="Arial, sans-serif" font-size="10" fill="#6366f1" text-anchor="middle">Market Data</text>
+            <path d="M70,20 C100,20 110,170 180,170" fill="none" stroke="#6366f1" stroke-width="2" stroke-dasharray="5,5">
+                <animate attributeName="stroke-dashoffset" from="10" to="0" dur="2s" repeatCount="indefinite" />
+            </path>
+        </g>
+        
+        <!-- User Trends -->
+        <g transform="translate(80, 220)">
+            <rect x="0" y="0" width="70" height="40" rx="8" fill="#f8fafc" stroke="#10b981" stroke-width="2" />
+            <text x="35" y="25" font-family="Arial, sans-serif" font-size="10" fill="#10b981" text-anchor="middle">User Trends</text>
+            <path d="M70,20 C100,20 120,260 180,260" fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="5,5">
+                <animate attributeName="stroke-dashoffset" from="10" to="0" dur="2s" repeatCount="indefinite" />
+            </path>
+        </g>
+        
+        <!-- Competitor Analysis -->
+        <g transform="translate(120, 290)">
+            <rect x="0" y="0" width="70" height="40" rx="8" fill="#f8fafc" stroke="#f97316" stroke-width="2" />
+            <text x="35" y="25" font-family="Arial, sans-serif" font-size="10" fill="#f97316" text-anchor="middle">Competitors</text>
+            <path d="M70,20 C100,20 110,290 180,290" fill="none" stroke="#f97316" stroke-width="2" stroke-dasharray="5,5">
+                <animate attributeName="stroke-dashoffset" from="10" to="0" dur="2s" repeatCount="indefinite" />
+            </path>
+        </g>
+    </g>
+    
+    <!-- Output/Recommendations -->
+    <g transform="translate(620, 200)">
+        <!-- Recommendation Cards -->
+        <g transform="translate(0, 0)">
+            <rect x="0" y="0" width="80" height="50" rx="8" fill="#f8fafc" stroke="#6366f1" stroke-width="2" />
+            <text x="40" y="30" font-family="Arial, sans-serif" font-size="10" fill="#6366f1" text-anchor="middle">Focus on AI</text>
+            <path d="M0,25 C-20,25 -30,170 -40,170" fill="none" stroke="#6366f1" stroke-width="2" stroke-dasharray="5,5">
+                <animate attributeName="stroke-dashoffset" from="10" to="0" dur="2s" repeatCount="indefinite" />
+            </path>
+        </g>
+        
+        <g transform="translate(0, 60)">
+            <rect x="0" y="0" width="80" height="50" rx="8" fill="#f8fafc" stroke="#10b981" stroke-width="2" />
+            <text x="40" y="20" font-family="Arial, sans-serif" font-size="9" fill="#10b981" text-anchor="middle">Target Digital</text>
+            <text x="40" y="35" font-family="Arial, sans-serif" font-size="9" fill="#10b981" text-anchor="middle">Nomads</text>
+            <path d="M0,25 C-20,25 -30,260 -40,260" fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="5,5">
+                <animate attributeName="stroke-dashoffset" from="10" to="0" dur="2s" repeatCount="indefinite" />
+            </path>
+        </g>
+        
+        <g transform="translate(0, 120)">
+            <rect x="0" y="0" width="80" height="50" rx="8" fill="#f8fafc" stroke="#f97316" stroke-width="2" />
+            <text x="40" y="30" font-family="Arial, sans-serif" font-size="9" fill="#f97316" text-anchor="middle">Offer Free Tier</text>
+            <path d="M0,25 C-20,25 -30,290 -40,290" fill="none" stroke="#f97316" stroke-width="2" stroke-dasharray="5,5">
+                <animate attributeName="stroke-dashoffset" from="10" to="0" dur="2s" repeatCount="indefinite" />
+            </path>
+        </g>
+    </g>
+    
+    <!-- Decorative Elements -->
+    <g>
+        <!-- Floating Data Points -->
+        <circle cx="150" cy="100" r="4" fill="#6366f1" opacity="0.7">
+            <animate attributeName="cy" from="100" to="95" dur="3s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="120" cy="120" r="3" fill="#10b981" opacity="0.7">
+            <animate attributeName="cy" from="120" to="125" dur="2.5s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="180" cy="80" r="5" fill="#f97316" opacity="0.7">
+            <animate attributeName="cy" from="80" to="75" dur="3.5s" repeatCount="indefinite" />
+        </circle>
+        
+        <circle cx="630" cy="150" r="4" fill="#6366f1" opacity="0.7">
+            <animate attributeName="cy" from="150" to="145" dur="3s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="650" cy="170" r="3" fill="#10b981" opacity="0.7">
+            <animate attributeName="cy" from="170" to="175" dur="2.5s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="610" cy="130" r="5" fill="#f97316" opacity="0.7">
+            <animate attributeName="cy" from="130" to="125" dur="3.5s" repeatCount="indefinite" />
+        </circle>
+    </g>
+    
+    <!-- Lightbulb / Idea Icon -->
+    <g transform="translate(400, 50)" opacity="0.9">
+        <circle cx="0" cy="-10" r="25" fill="#f8fafc" stroke="#f97316" stroke-width="2" />
+        <path d="M-8,-20 L8,-20 L0,-30 Z" fill="#f97316" />
+        <path d="M0,0 C-8,0 -15,-8 -15,-18 C-15,-28 -8,-35 0,-35 C8,-35 15,-28 15,-18 C15,-8 8,0 0,0 Z" fill="none" stroke="#f97316" stroke-width="2" />
+        <rect x="-5" y="0" width="10" height="5" fill="#f97316" />
+        <animateTransform attributeName="transform" type="translate" from="400, 50" to="400, 45" dur="3s" repeatCount="indefinite" />
+    </g>
+</svg> 
