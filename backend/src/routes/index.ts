@@ -1,11 +1,11 @@
-import { Express, Request, Response } from 'express';
+import { Router, Request, Response } from 'express';
 import authRoutes from './authRoutes';
 import ideaRoutes from './ideaRoutes';
 
 /**
  * Setup all API routes
  */
-export const setupRoutes = (app: Express) => {
+export const setupRoutes = (app: any) => {
   // API route prefix
   const API_PREFIX = '/api';
 
