@@ -23,11 +23,22 @@ const connectDB = async () => {
     console.log('MongoDB connected');
   } catch (error) {
     console.error('MongoDB connection error:', error.message);
-    process.exit(1);
+    // Don't exit on MongoDB connection error in production
+    if (process.env.NODE_ENV !== 'production') {
+      process.exit(1);
+    }
   }
 };
 
 // Basic routes
+app.get('/', (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'Idea Validator API is running',
+    version: '1.0.0'
+  });
+});
+
 app.get('/health', (req, res) => {
   res.status(200).json({
     success: true,
@@ -66,14 +77,29 @@ app.use((err, req, res, next) => {
 // Start server
 const startServer = async () => {
   try {
-    await connectDB();
-    app.listen(PORT, () => {
+    // Try to connect to MongoDB but don't wait for it in production
+    if (process.env.NODE_ENV === 'production') {
+      connectDB().catch(err => console.error('MongoDB connection error:', err.message));
+    } else {
+      await connectDB();
+    }
+    
+    // Explicitly bind to 0.0.0.0 to listen on all network interfaces
+    app.listen(PORT, '0.0.0.0', () => {
       console.log(`Server running on port ${PORT}`);
+      console.log(`Server environment: ${process.env.NODE_ENV}`);
+      console.log('Health check endpoint: /health');
     });
   } catch (error) {
     console.error('Failed to start server:', error.message);
     process.exit(1);
   }
 };
+
+// Log environment information
+console.log('Starting Idea Validator API server');
+console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
+console.log(`PORT: ${PORT}`);
+console.log(`MONGODB_URI: ${process.env.MONGODB_URI ? '(set)' : '(not set)'}`);
 
 startServer(); 
