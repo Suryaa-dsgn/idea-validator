@@ -1,7 +1,9 @@
 #!/bin/bash
 set -e
 
+echo "======================================================"
 echo "Starting simple JavaScript deployment process..."
+echo "======================================================"
 
 # Install dependencies
 echo "Installing dependencies..."
@@ -14,10 +16,11 @@ echo "Using simple JavaScript server for deployment..."
 echo "Ensuring .env file exists..."
 if [ ! -f .env ]; then
   echo "Creating .env file with default values..."
-  # Render automatically injects PORT env variable, but let's make sure we have a fallback
-  # If PORT is set, use it, otherwise default to 10000 (Render's preferred port)
-  echo "PORT=${PORT:-10000}" > .env
+  
+  # Explicitly set PORT to 10000 for Render
+  echo "PORT=10000" > .env
   echo "NODE_ENV=production" >> .env
+  
   # The actual connection string should be set in Render's environment variables
   if [ -z "$MONGODB_URI" ]; then
     echo "WARNING: MONGODB_URI is not set in environment variables!"
@@ -28,15 +31,32 @@ if [ ! -f .env ]; then
   fi
 fi
 
-echo "Environment information:"
-echo "PORT: ${PORT:-10000}"
-echo "NODE_ENV: production"
+# Print environment for troubleshooting
+echo "======================================================"
+echo "DEPLOYMENT ENVIRONMENT INFORMATION:"
+echo "======================================================"
+echo "Current directory: $(pwd)"
+echo "Node version: $(node -v)"
+echo "NPM version: $(npm -v)"
+echo "OS information: $(uname -a)"
+echo "PORT setting in .env: $(grep PORT .env)"
 
-echo "Build process completed, starting the application..."
+# Check if server.js exists
+if [ -f server.js ]; then
+  echo "server.js found ✅"
+else
+  echo "ERROR: server.js not found! ❌"
+  echo "Current directory contains: $(ls -la)"
+  exit 1
+fi
 
-# Make sure the PORT environment variable is defined when starting the application
-export PORT=${PORT:-10000}
-echo "Starting server on PORT $PORT"
+echo "======================================================"
+echo "Starting server with explicit port setting..."
+echo "======================================================"
 
-# Start the application using the simple JavaScript file
-node server.js 
+# Force the PORT to be set to 10000 for Render
+export PORT=10000
+echo "Forcing PORT to be $PORT"
+
+# Start the application with increased logging
+NODE_DEBUG=http,net node server.js 
