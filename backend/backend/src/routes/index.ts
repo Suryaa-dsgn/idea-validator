@@ -1,11 +1,12 @@
-import { Router, Request, Response } from 'express';
+import { Express, Request, Response } from 'express';
 import authRoutes from './authRoutes';
 import ideaRoutes from './ideaRoutes';
+import stripeRoutes from './stripeRoutes';
 
 /**
  * Setup all API routes
  */
-export const setupRoutes = (app: any) => {
+export const setupRoutes = (app: Express) => {
   // API route prefix
   const API_PREFIX = '/api';
 
@@ -14,6 +15,9 @@ export const setupRoutes = (app: any) => {
 
   // Idea Routes
   app.use(`${API_PREFIX}/ideas`, ideaRoutes);
+
+  // Payment Routes
+  app.use(`${API_PREFIX}/payments`, stripeRoutes);
 
   // Health check route
   app.get('/health', (req: Request, res: Response) => {
