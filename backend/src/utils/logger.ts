@@ -1,4 +1,6 @@
 import winston from 'winston';
+// Use require for winston to avoid TypeScript issues
+const { createLogger, format, transports, addColors } = require('winston');
 
 // Define log levels
 const levels = {
@@ -26,36 +28,36 @@ const colors = {
 };
 
 // Add colors to winston
-winston.addColors(colors);
+addColors(colors);
 
 // Define the format for logs
-const format = winston.format.combine(
-  winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
-  winston.format.colorize({ all: true }),
-  winston.format.printf(
+const customFormat = format.combine(
+  format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
+  format.colorize({ all: true }),
+  format.printf(
     (info: any) => `${info.timestamp} ${info.level}: ${info.message}`,
   ),
 );
 
 // Define which transports to use
-const transports = [
+const customTransports = [
   // Console transport for all logs
-  new winston.transports.Console(),
+  new transports.Console(),
   // File transport for errors
-  new winston.transports.File({
+  new transports.File({
     filename: 'logs/error.log',
     level: 'error',
   }),
   // File transport for all logs
-  new winston.transports.File({ filename: 'logs/all.log' }),
+  new transports.File({ filename: 'logs/all.log' }),
 ];
 
 // Create the logger
-export const logger = winston.createLogger({
+export const logger = createLogger({
   level: process.env.LOG_LEVEL || level(),
   levels,
-  format,
-  transports,
+  format: customFormat,
+  transports: customTransports,
 });
 
 // Export a stream object for Morgan
