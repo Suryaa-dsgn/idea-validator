@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "start": "node server.js"
+  },
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "buildCommand": "npm install"
+} 
