@@ -480,7 +480,7 @@ section {
 .feature {
     display: flex;
     align-items: flex-start;
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: 40px;
 }
 
 .feature-icon {
