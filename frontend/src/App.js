@@ -5,6 +5,7 @@ import Login from './components/auth/Login';
 import SignUp from './components/auth/SignUp';
 import ForgotPassword from './components/auth/ForgotPassword';
 import Dashboard from './components/dashboard/Dashboard';
+import Home from './components/home/Home';
 import './App.css';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <div className="App">
           <Routes>
             {/* Public Routes */}
+            <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -23,8 +25,8 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
             </Route>
             
-            {/* Redirect to login by default */}
-            <Route path="*" element={<Navigate to="/login" replace />} />
+            {/* Redirect to home by default */}
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </div>
       </Router>
