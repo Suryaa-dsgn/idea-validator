@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
-import logo from '../../assets/logo.svg'; // You'll need to create this logo file
+import logo from '../../assets/logo.svg';
+import dashboardImage from '../../assets/dashboard-image.svg'; // Using SVG image
 
 const Home = () => {
   return (
@@ -66,8 +67,15 @@ const Home = () => {
           </div>
           
           <div className="hero-image">
-            {/* This will be your validation dashboard illustration */}
-            <img src="https://placehold.co/600x400" alt="Idea Validation Report" className="dashboard-image" />
+            <img 
+              src={dashboardImage} 
+              alt="Idea Validation Report" 
+              className="dashboard-image" 
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = "https://placehold.co/600x400/6c63ff/ffffff?text=Idea+Validator";
+              }}
+            />
           </div>
         </div>
       </section>
