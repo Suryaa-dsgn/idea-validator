@@ -1,18 +1,36 @@
 [build]
-  publish = "."
-  command = "npm run build"
+  base = "."
+  publish = "frontend/build"
+  command = "cd frontend && npm install && npm run build"
+
+# Handle routes for the React application
+[[redirects]]
+  from = "/login"
+  to = "/frontend/build/index.html"
+  status = 200
 
 [[redirects]]
-  from = "/frontend/*"
-  to = "/frontend/index.html"
+  from = "/signup"
+  to = "/frontend/build/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/dashboard"
+  to = "/frontend/build/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/forgot-password"
+  to = "/frontend/build/index.html"
   status = 200
 
 [[redirects]]
   from = "/api/*"
-  to = "http://localhost:3001/api/:splat"
+  to = "/.netlify/functions/api/:splat"
   status = 200
   force = true
 
+# Fallback for all other routes to the main site
 [[redirects]]
   from = "/*"
   to = "/index.html"
