@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Routing Debug</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #6c63ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Routing Debug Page</h1>
+    <p>Use this page to test basic navigation to different routes.</p>
+    
+    <div style="margin: 20px 0;">
+        <a href="/" class="btn">Home</a>
+        <a href="/login" class="btn">Login</a>
+        <a href="/signup" class="btn">Sign Up</a>
+        <a href="/dashboard" class="btn">Dashboard</a>
+    </div>
+    
+    <h2>Browser Info</h2>
+    <pre id="browser-info"></pre>
+    
+    <h2>Current Location</h2>
+    <pre id="location-info"></pre>
+    
+    <script>
+        // Display browser information
+        const browserInfoElement = document.getElementById('browser-info');
+        browserInfoElement.textContent = `
+User Agent: ${navigator.userAgent}
+Window Inner Width: ${window.innerWidth}
+Window Inner Height: ${window.innerHeight}
+Window Location: ${window.location.href}
+`;
+        
+        // Display location information
+        const locationInfoElement = document.getElementById('location-info');
+        locationInfoElement.textContent = `
+Protocol: ${window.location.protocol}
+Host: ${window.location.host}
+Pathname: ${window.location.pathname}
+Search: ${window.location.search}
+Hash: ${window.location.hash}
+`;
+    </script>
+</body>
+</html> 

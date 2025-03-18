@@ -23,8 +23,8 @@ const Home = () => {
           </div>
           
           <div className="navbar-cta">
-            <Link to="/login" className="btn btn-secondary">Log In</Link>
-            <Link to="/signup" className="btn btn-primary">Sign Up</Link>
+            <a href="/login" className="btn btn-secondary">Log In</a>
+            <a href="/signup" className="btn btn-primary">Sign Up</a>
           </div>
         </div>
       </nav>
@@ -45,9 +45,9 @@ const Home = () => {
                 className="hero-input" 
                 placeholder="Enter your startup idea..." 
               />
-              <Link to="/signup" className="btn hero-btn">
+              <a href="/signup" className="btn hero-btn">
                 Validate My Idea →
-              </Link>
+              </a>
             </div>
             
             <div className="hero-stats">
