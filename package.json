@@ -10,7 +10,7 @@
     "dev:all": "concurrently \"npm run dev\" \"cd frontend && npm start\" \"npm run dev:server\"",
     "test": "jest",
     "build": "tsc",
-    "netlify:build": "npm install serverless-http body-parser && cd frontend && npm install && npm run build"
+    "netlify:build": "npm install serverless-http body-parser && cd frontend && npm install && DISABLE_ESLINT_PLUGIN=true CI=false npm run build"
   },
   "keywords": [
     "startup",

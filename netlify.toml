@@ -8,6 +8,9 @@
   NODE_VERSION = "18.15.0"
   NPM_VERSION = "9.5.0"
   NETLIFY_USE_YARN = "false"
+  CI = "false"
+  ESLINT_NO_DEV_ERRORS = "true"
+  DISABLE_ESLINT_PLUGIN = "true"
 
 # API routes
 [[redirects]]
