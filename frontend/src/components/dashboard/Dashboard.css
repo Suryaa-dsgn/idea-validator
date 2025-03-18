@@ -1,0 +1,365 @@
+/* Dashboard Layout */
+.dashboard-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.user-welcome h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.user-welcome p {
+  color: #666;
+  font-size: 1rem;
+}
+
+.add-idea-btn {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-idea-btn:hover {
+  background-color: #2980b9;
+}
+
+.loading-spinner {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  font-size: 1.2rem;
+}
+
+.error-alert {
+  background-color: #fdeaea;
+  border-left: 4px solid #e74c3c;
+  color: #e74c3c;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+}
+
+/* Ideas Grid */
+.ideas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.no-ideas {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  color: #666;
+}
+
+.no-ideas p {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+/* Idea Card */
+.idea-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.idea-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.idea-header h3 {
+  font-size: 1.2rem;
+  margin: 0;
+  color: #333;
+  font-weight: 600;
+}
+
+.idea-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  color: #95a5a6;
+  cursor: pointer;
+  padding: 0.25rem;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+.icon-button.edit:hover {
+  color: #3498db;
+}
+
+.icon-button.delete:hover {
+  color: #e74c3c;
+}
+
+.idea-category {
+  display: inline-block;
+  background-color: #f1f5f9;
+  color: #64748b;
+  font-size: 0.85rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 50px;
+  margin-bottom: 1rem;
+}
+
+.idea-description {
+  margin-bottom: auto;
+  color: #4a4a4a;
+  line-height: 1.6;
+}
+
+.idea-footer {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.validation-section {
+  display: flex;
+  align-items: center;
+}
+
+.validation-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.validation-badge.not-validated {
+  background-color: #f8f9fa;
+  color: #adb5bd;
+}
+
+.validation-badge.validating {
+  background-color: #fff7e6;
+  color: #d97706;
+}
+
+.validation-badge.validated {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.validation-badge.validated.high {
+  background-color: #ecfdf5;
+  color: #059669;
+}
+
+.validation-badge.validated.medium {
+  background-color: #fffbeb;
+  color: #d97706;
+}
+
+.validation-badge.validated.low {
+  background-color: #fef2f2;
+  color: #dc2626;
+}
+
+.check-icon {
+  margin-right: 0.5rem;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+  margin-right: 0.5rem;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.validate-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: white;
+  border: 1px solid #3498db;
+  color: #3498db;
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.validate-button:hover {
+  background-color: #ebf5ff;
+}
+
+.validate-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* New Idea Form */
+.new-idea-form-container {
+  margin-bottom: 2rem;
+}
+
+.new-idea-form {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+}
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.form-header h3 {
+  font-size: 1.25rem;
+  margin: 0;
+  color: #333;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close-button:hover {
+  color: #e74c3c;
+}
+
+.new-idea-form form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.new-idea-form .form-group {
+  margin-bottom: 0;
+}
+
+.new-idea-form .form-group:nth-child(3),
+.new-idea-form .form-group:nth-child(4),
+.new-idea-form .form-group:nth-child(6),
+.new-idea-form .form-actions {
+  grid-column: span 2;
+}
+
+.new-idea-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #4a4a4a;
+}
+
+.required {
+  color: #e74c3c;
+}
+
+.new-idea-form input,
+.new-idea-form select,
+.new-idea-form textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.new-idea-form input:focus,
+.new-idea-form select:focus,
+.new-idea-form textarea:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+.new-idea-form input.error,
+.new-idea-form select.error,
+.new-idea-form textarea.error {
+  border-color: #e74c3c;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.btn-secondary {
+  background-color: white;
+  border: 1px solid #ddd;
+  color: #666;
+}
+
+.btn-secondary:hover {
+  background-color: #f5f5f5;
+}
+
+@media (max-width: 768px) {
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .new-idea-form form {
+    grid-template-columns: 1fr;
+  }
+
+  .new-idea-form .form-group,
+  .new-idea-form .form-actions {
+    grid-column: 1;
+  }
+
+  .ideas-grid {
+    grid-template-columns: 1fr;
+  }
+} 

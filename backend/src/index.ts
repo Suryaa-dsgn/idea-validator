@@ -18,7 +18,10 @@ const PORT = process.env.PORT || 5000;
 
 // Apply security middleware
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:3000', 'http://localhost:3001'],
+  credentials: true
+}));
 
 // Request logging
 app.use(morgan('dev'));

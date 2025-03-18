@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        pre {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            overflow-x: auto;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+        .success {
+            color: green;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Idea Validator API Test</h1>
+    
+    <div class="container">
+        <h2>Test API Endpoints</h2>
+        <button onclick="testWakeUp()">Wake Up Server</button>
+        <button onclick="testApiTest()">Test /api-test</button>
+        <button onclick="testHealth()">Test /health</button>
+        <button onclick="testApi()">Test /api</button>
+        
+        <h3>Results:</h3>
+        <pre id="basic-results">Results will appear here...</pre>
+    </div>
+    
+    <div class="container">
+        <h2>Register User</h2>
+        <form id="register-form">
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" value="Test User" required>
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" value="test@example.com" required>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" value="password123" required>
+            </div>
+            <div>
+                <label for="company">Company:</label>
+                <input type="text" id="company" value="Test Company">
+            </div>
+            <button type="button" onclick="registerUser()">Register</button>
+        </form>
+        <div id="register-error" class="error"></div>
+        <div id="register-success" class="success"></div>
+        <h3>Response:</h3>
+        <pre id="register-results">Registration results will appear here...</pre>
+    </div>
+    
+    <div class="container">
+        <h2>Login User</h2>
+        <form id="login-form">
+            <div>
+                <label for="login-email">Email:</label>
+                <input type="email" id="login-email" value="test@example.com" required>
+            </div>
+            <div>
+                <label for="login-password">Password:</label>
+                <input type="password" id="login-password" value="password123" required>
+            </div>
+            <button type="button" onclick="loginUser()">Login</button>
+        </form>
+        <div id="login-error" class="error"></div>
+        <div id="login-success" class="success"></div>
+        <h3>Response:</h3>
+        <pre id="login-results">Login results will appear here...</pre>
+    </div>
+    
+    <script>
+        const API_URL = 'https://idea-validator-backend.onrender.com';
+        
+        // Helper function to make API calls
+        async function callApi(endpoint, method = 'GET', data = null) {
+            const options = {
+                method,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            };
+            
+            if (data) {
+                options.body = JSON.stringify(data);
+            }
+            
+            try {
+                console.log(`Calling ${endpoint} with options:`, options);
+                const response = await fetch(`${API_URL}${endpoint}`, options);
+                const responseData = await response.text();
+                
+                try {
+                    // Try to parse as JSON
+                    return { 
+                        status: response.status,
+                        ok: response.ok,
+                        data: JSON.parse(responseData),
+                        text: responseData
+                    };
+                } catch (e) {
+                    // Return as text if not valid JSON
+                    return { 
+                        status: response.status,
+                        ok: response.ok,
+                        text: responseData
+                    };
+                }
+            } catch (error) {
+                console.error(`Error calling ${endpoint}:`, error);
+                return {
+                    error: true,
+                    message: error.message
+                };
+            }
+        }
+        
+        // Test functions
+        async function testWakeUp() {
+            const resultsElement = document.getElementById('basic-results');
+            resultsElement.textContent = 'Waking up server...';
+            
+            const result = await callApi('/');
+            resultsElement.textContent = JSON.stringify(result, null, 2);
+        }
+        
+        async function testApiTest() {
+            const resultsElement = document.getElementById('basic-results');
+            resultsElement.textContent = 'Testing /api-test...';
+            
+            const result = await callApi('/api-test');
+            resultsElement.textContent = JSON.stringify(result, null, 2);
+        }
+        
+        async function testHealth() {
+            const resultsElement = document.getElementById('basic-results');
+            resultsElement.textContent = 'Testing /health...';
+            
+            const result = await callApi('/health');
+            resultsElement.textContent = JSON.stringify(result, null, 2);
+        }
+        
+        async function testApi() {
+            const resultsElement = document.getElementById('basic-results');
+            resultsElement.textContent = 'Testing /api...';
+            
+            const result = await callApi('/api');
+            resultsElement.textContent = JSON.stringify(result, null, 2);
+        }
+        
+        // Registration function
+        async function registerUser() {
+            const resultsElement = document.getElementById('register-results');
+            const errorElement = document.getElementById('register-error');
+            const successElement = document.getElementById('register-success');
+            
+            // Clear previous messages
+            errorElement.textContent = '';
+            successElement.textContent = '';
+            resultsElement.textContent = 'Submitting registration...';
+            
+            const userData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value,
+                company: document.getElementById('company').value
+            };
+            
+            try {
+                // First, wake up the server
+                await callApi('/');
+                
+                // Then make the registration request
+                const result = await callApi('/api/auth/register', 'POST', userData);
+                resultsElement.textContent = JSON.stringify(result, null, 2);
+                
+                if (result.error) {
+                    errorElement.textContent = result.message;
+                } else if (result.data && result.data.success) {
+                    successElement.textContent = 'Registration successful!';
+                    localStorage.setItem('token', result.data.token);
+                } else {
+                    errorElement.textContent = result.data?.error || 'Registration failed';
+                }
+            } catch (error) {
+                errorElement.textContent = error.message;
+                resultsElement.textContent = JSON.stringify({ error: error.message }, null, 2);
+            }
+        }
+        
+        // Login function
+        async function loginUser() {
+            const resultsElement = document.getElementById('login-results');
+            const errorElement = document.getElementById('login-error');
+            const successElement = document.getElementById('login-success');
+            
+            // Clear previous messages
+            errorElement.textContent = '';
+            successElement.textContent = '';
+            resultsElement.textContent = 'Logging in...';
+            
+            const userData = {
+                email: document.getElementById('login-email').value,
+                password: document.getElementById('login-password').value
+            };
+            
+            try {
+                const result = await callApi('/api/auth/login', 'POST', userData);
+                resultsElement.textContent = JSON.stringify(result, null, 2);
+                
+                if (result.error) {
+                    errorElement.textContent = result.message;
+                } else if (result.data && result.data.success) {
+                    successElement.textContent = 'Login successful!';
+                    localStorage.setItem('token', result.data.token);
+                } else {
+                    errorElement.textContent = result.data?.error || 'Login failed';
+                }
+            } catch (error) {
+                errorElement.textContent = error.message;
+                resultsElement.textContent = JSON.stringify({ error: error.message }, null, 2);
+            }
+        }
+    </script>
+</body>
+</html> 

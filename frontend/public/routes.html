@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>API Routes Test</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .route { margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+    .route-name { font-weight: bold; }
+    .result { margin-top: 10px; padding: 10px; background-color: #f5f5f5; }
+    button { padding: 5px 10px; margin-right: 5px; }
+  </style>
+</head>
+<body>
+  <h1>Test API Routes</h1>
+  <p>Click the buttons to test different API endpoints on your backend:</p>
+  
+  <div class="route">
+    <div class="route-name">Backend Root</div>
+    <button onclick="testRoute('https://idea-validator-backend.onrender.com')">Test</button>
+    <div id="result-root" class="result">Results will appear here</div>
+  </div>
+  
+  <div class="route">
+    <div class="route-name">/api</div>
+    <button onclick="testRoute('https://idea-validator-backend.onrender.com/api')">Test</button>
+    <div id="result-api" class="result">Results will appear here</div>
+  </div>
+  
+  <div class="route">
+    <div class="route-name">/api/auth/register</div>
+    <button onclick="testRoute('https://idea-validator-backend.onrender.com/api/auth/register')">Test GET</button>
+    <button onclick="testPostRoute('https://idea-validator-backend.onrender.com/api/auth/register')">Test POST</button>
+    <div id="result-api-auth-register" class="result">Results will appear here</div>
+  </div>
+  
+  <div class="route">
+    <div class="route-name">/auth/register</div>
+    <button onclick="testRoute('https://idea-validator-backend.onrender.com/auth/register')">Test GET</button>
+    <button onclick="testPostRoute('https://idea-validator-backend.onrender.com/auth/register')">Test POST</button>
+    <div id="result-auth-register" class="result">Results will appear here</div>
+  </div>
+
+  <script>
+    async function testRoute(url) {
+      const resultId = 'result-' + url.replace(/https:\/\/idea-validator-backend\.onrender\.com\//g, '').replace(/\//g, '-') || 'root';
+      const resultDiv = document.getElementById(resultId);
+      resultDiv.innerHTML = "Testing...";
+      
+      try {
+        const response = await fetch(url);
+        const text = await response.text();
+        resultDiv.innerHTML = `Status: ${response.status} ${response.statusText}<br><br>Response:<br>${text.substring(0, 500)}${text.length > 500 ? '...' : ''}`;
+      } catch (error) {
+        resultDiv.innerHTML = `Error: ${error.message}`;
+      }
+    }
+    
+    async function testPostRoute(url) {
+      const resultId = 'result-' + url.replace(/https:\/\/idea-validator-backend\.onrender\.com\//g, '').replace(/\//g, '-') || 'root';
+      const resultDiv = document.getElementById(resultId);
+      resultDiv.innerHTML = "Testing POST...";
+      
+      const testData = {
+        name: "Test User",
+        email: "test@example.com",
+        password: "password123",
+        company: "Test Company"
+      };
+      
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(testData)
+        });
+        
+        let responseText;
+        try {
+          const json = await response.json();
+          responseText = JSON.stringify(json, null, 2);
+        } catch (e) {
+          responseText = await response.text();
+        }
+        
+        resultDiv.innerHTML = `Status: ${response.status} ${response.statusText}<br><br>Response:<br><pre>${responseText.substring(0, 500)}${responseText.length > 500 ? '...' : ''}</pre>`;
+      } catch (error) {
+        resultDiv.innerHTML = `Error: ${error.message}`;
+      }
+    }
+  </script>
+</body>
+</html> 

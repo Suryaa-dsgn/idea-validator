@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Direct API Test</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: 0 auto; }
+    .form-group { margin-bottom: 15px; }
+    label { display: block; margin-bottom: 5px; }
+    input { width: 100%; padding: 8px; box-sizing: border-box; }
+    button { padding: 10px 15px; background: #4285f4; color: white; border: none; cursor: pointer; }
+    .result { margin-top: 20px; padding: 15px; background: #f5f5f5; border-radius: 4px; }
+    .wake-button { background: #34a853; }
+    .card { border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+    h2 { margin-top: 0; }
+    pre { white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h1>Direct API Testing Tool</h1>
+  
+  <div class="card">
+    <h2>1. Wake Up Server</h2>
+    <p>First, wake up the server. Free tier Render services go to sleep after inactivity.</p>
+    <button class="wake-button" onclick="wakeServer()">Wake Up Server</button>
+    <div id="wake-result" class="result">Results will appear here</div>
+  </div>
+  
+  <div class="card">
+    <h2>2. Test Registration</h2>
+    <form id="registration-form" onsubmit="testRegistration(event)">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" value="Test User" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" value="test2@example.com" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" value="password123" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="company">Company (optional):</label>
+        <input type="text" id="company" value="Test Company">
+      </div>
+      
+      <button type="submit">Test Registration</button>
+    </form>
+    <div id="registration-result" class="result">Results will appear here</div>
+  </div>
+  
+  <script>
+    const BASE_URL = 'https://idea-validator-backend.onrender.com';
+    
+    async function wakeServer() {
+      const resultDiv = document.getElementById('wake-result');
+      resultDiv.innerHTML = 'Waking up server...';
+      
+      try {
+        const startTime = new Date();
+        const response = await fetch(BASE_URL);
+        const endTime = new Date();
+        const responseTime = endTime - startTime;
+        
+        const text = await response.text();
+        resultDiv.innerHTML = `
+          Status: ${response.status} ${response.statusText}<br>
+          Response Time: ${responseTime}ms<br>
+          Response: ${text}
+        `;
+      } catch (error) {
+        resultDiv.innerHTML = `Error: ${error.message}`;
+      }
+    }
+    
+    async function testRegistration(event) {
+      event.preventDefault();
+      
+      const resultDiv = document.getElementById('registration-result');
+      resultDiv.innerHTML = 'Testing registration...';
+      
+      const userData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value,
+        company: document.getElementById('company').value
+      };
+      
+      const endpoints = [
+        `${BASE_URL}/api/auth/register`,
+        `${BASE_URL}/auth/register`,
+        `${BASE_URL}/api/v1/auth/register`
+      ];
+      
+      let results = '';
+      
+      for (const endpoint of endpoints) {
+        results += `<h3>Testing: ${endpoint}</h3>`;
+        
+        try {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+          });
+          
+          let responseText;
+          try {
+            const json = await response.json();
+            responseText = `<pre>${JSON.stringify(json, null, 2)}</pre>`;
+          } catch (e) {
+            const text = await response.text();
+            responseText = text || '(Empty response)';
+          }
+          
+          results += `
+            Status: ${response.status} ${response.statusText}<br>
+            Response: ${responseText}<br><br>
+          `;
+        } catch (error) {
+          results += `Error: ${error.message}<br><br>`;
+        }
+      }
+      
+      resultDiv.innerHTML = results;
+    }
+    
+    // Auto-wake the server on page load
+    wakeServer();
+  </script>
+</body>
+</html> 

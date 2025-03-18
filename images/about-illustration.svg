@@ -115,6 +115,7 @@
             <text x="0" y="10" font-family="Arial, sans-serif" font-size="10" fill="#64748b" text-anchor="middle">AI</text>
 
             <text x="0" y="30" font-family="Arial, sans-serif" font-size="10" fill="#64748b" text-anchor="middle">Chatbot</text>
+
             
             <!-- Chat Bubble Icon -->
             <rect x="-15" y="-25" width="30" height="20" rx="5" fill="#f8fafc" />
