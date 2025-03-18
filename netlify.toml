@@ -1,7 +1,11 @@
 [build]
   base = "."
   publish = "frontend/build"
-  command = "cd frontend && npm install && npm run build"
+  command = "npm run netlify:build"
+  
+[build.environment]
+  NODE_VERSION = "18.15.0"
+  NPM_VERSION = "9.5.0"
 
 # Handle routes for the React application
 [[redirects]]
