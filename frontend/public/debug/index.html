@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Debug Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      color: #333;
+    }
+    pre {
+      background-color: #eee;
+      padding: 10px;
+      border-radius: 3px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Debug Page</h1>
+    <p>This is a simple debug page to check if static files are being served correctly.</p>
+    <p>If you can see this page, then your Netlify hosting is working but there might be an issue with your React app.</p>
+    
+    <h2>Common Issues:</h2>
+    <ul>
+      <li>JavaScript errors in the production build</li>
+      <li>Path issues with static assets</li>
+      <li>Client-side routing problems</li>
+      <li>Missing environment variables</li>
+    </ul>
+    
+    <h2>Debugging Steps:</h2>
+    <ol>
+      <li>Check browser console for errors</li>
+      <li>Verify that redirects are working correctly</li>
+      <li>Ensure homepage is set correctly in package.json</li>
+      <li>Try a simple React build without the backend integration</li>
+    </ol>
+  </div>
+
+  <script>
+    // Simple script to check if JavaScript is running
+    console.log('Debug page loaded successfully');
+    
+    // Display browser and environment info
+    document.addEventListener('DOMContentLoaded', function() {
+      var container = document.querySelector('.container');
+      var infoDiv = document.createElement('div');
+      
+      infoDiv.innerHTML = `
+        <h2>Environment Info:</h2>
+        <pre>
+URL: ${window.location.href}
+Path: ${window.location.pathname}
+User Agent: ${navigator.userAgent}
+Browser: ${navigator.appName}
+Platform: ${navigator.platform}
+        </pre>
+      `;
+      
+      container.appendChild(infoDiv);
+    });
+  </script>
+</body>
+</html> 

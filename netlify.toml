@@ -1,46 +1,16 @@
 [build]
   base = "."
   publish = "frontend/build"
-  command = "npm run netlify:build"
-  ignore_errors = true
+  command = "cd frontend && npm install && DISABLE_ESLINT_PLUGIN=true CI=false npm run build"
   
 [build.environment]
   NODE_VERSION = "18.15.0"
   NPM_VERSION = "9.5.0"
-  NETLIFY_USE_YARN = "false"
   CI = "false"
   ESLINT_NO_DEV_ERRORS = "true"
   DISABLE_ESLINT_PLUGIN = "true"
 
-# API routes
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/api/:splat"
-  status = 200
-  force = true
-
-# React app routes
-[[redirects]]
-  from = "/login"
-  to = "/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/signup"
-  to = "/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/dashboard"
-  to = "/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/forgot-password"
-  to = "/index.html"
-  status = 200
-
-# Fallback to index
+# All routes to React app (SPA)
 [[redirects]]
   from = "/*"
   to = "/index.html"
