@@ -25,10 +25,15 @@ try {
   
   console.log('React app rendered successfully');
   
-  // Hide loading message if it exists
-  const loadingMessage = document.getElementById('loading-message');
-  if (loadingMessage) {
-    loadingMessage.style.display = 'none';
+  // Hide loading message
+  if (typeof window.hideLoading === 'function') {
+    window.hideLoading();
+  } else {
+    // Fallback if the function isn't available
+    const loadingMessage = document.getElementById('loading-message');
+    if (loadingMessage) {
+      loadingMessage.style.display = 'none';
+    }
   }
 } catch (error) {
   console.error('Failed to render React application:', error);

@@ -41,6 +41,12 @@
         text-align: center;
         padding: 40px;
         font-size: 16px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: #f9fafb;
+        z-index: 1000;
       }
       
       .error-container {
@@ -62,6 +68,19 @@
           loadingMessage.style.display = 'block';
         }
       });
+      
+      // Hide loading message when app is ready
+      window.hideLoading = function() {
+        var loadingMessage = document.getElementById('loading-message');
+        if (loadingMessage) {
+          loadingMessage.style.display = 'none';
+        }
+      };
+      
+      // Auto-hide after 2 seconds as a fallback
+      setTimeout(function() {
+        window.hideLoading();
+      }, 2000);
       
       window.addEventListener('error', function(e) {
         console.log('Global error caught:', e.message, e.filename, e.lineno);
