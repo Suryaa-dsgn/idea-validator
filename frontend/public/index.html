@@ -295,6 +295,32 @@
           fallback.style.display = 'block';
         }
       }, 2000);
+
+      // Function to handle navigation button clicks
+      document.addEventListener('click', function(event) {
+        // Check if the clicked element is a sign up or log in button
+        const target = event.target;
+        
+        // Check for buttons by text content
+        if (target.textContent && (
+            target.textContent.trim() === 'Sign Up' || 
+            target.textContent.trim() === 'Validate My Idea →' ||
+            target.parentElement.textContent.trim() === 'Sign Up' || 
+            target.parentElement.textContent.trim() === 'Validate My Idea →')) {
+          event.preventDefault();
+          window.location.href = '/signup';
+        }
+        
+        if (target.textContent && (
+            target.textContent.trim() === 'Log In' || 
+            target.parentElement.textContent.trim() === 'Log In')) {
+          event.preventDefault();
+          window.location.href = '/login';
+        }
+      });
     </script>
+    
+    <!-- Include our script for fixing navigation -->
+    <script src="%PUBLIC_URL%/fix-navigation.js"></script>
   </body>
 </html> 
