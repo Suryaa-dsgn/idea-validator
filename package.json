@@ -10,8 +10,7 @@
     "dev:all": "concurrently \"npm run dev\" \"cd frontend && npm start\" \"npm run dev:server\"",
     "test": "jest",
     "build": "tsc",
-    "netlify:build": "cd frontend && npm install && npm run build",
-    "postinstall": "npm run build"
+    "netlify:build": "cd frontend && npm install && npm run build"
   },
   "keywords": [
     "startup",
