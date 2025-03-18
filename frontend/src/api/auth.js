@@ -1,39 +1,26 @@
 import axios from 'axios';
 
-// Try with a direct URL to register
-const RENDER_API_URL = 'https://idea-validator-backend.onrender.com';
+// API URLs
+const LOCAL_API_URL = '/api';
+const API_URL = LOCAL_API_URL;
 
 // Register user
 export const register = async (userData) => {
   try {
-    // First, make a simple request to wake up the server
-    try {
-      await axios.get(RENDER_API_URL);
-      console.log('Backend is awake');
-    } catch (err) {
-      console.log('Failed to wake backend:', err.message);
-    }
-    
-    // Wait a moment for server to fully wake up
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // Now try registration with a single endpoint
-    const endpoint = `${RENDER_API_URL}/api/auth/register`;
-    console.log(`Attempting registration at: ${endpoint}`, userData);
+    console.log(`Attempting registration at: ${API_URL}/auth/register`, userData);
     
     try {
-      const response = await axios.post(endpoint, userData, {
+      const response = await axios.post(`${API_URL}/auth/register`, userData, {
         headers: {
           'Content-Type': 'application/json'
-        },
-        // Increase timeout for potentially slow free-tier services
-        timeout: 10000
+        }
       });
       
       console.log('Registration response:', response.data);
       
       if (response.data.success) {
         localStorage.setItem('token', response.data.token);
+        localStorage.setItem('user', JSON.stringify(response.data.user));
       }
       return response.data;
     } catch (err) {
@@ -58,18 +45,18 @@ export const register = async (userData) => {
 // Login user
 export const login = async (email, password) => {
   try {
-    const response = await axios.post(`${RENDER_API_URL}/auth/login`, {
+    const response = await axios.post(`${API_URL}/auth/login`, {
       email,
       password
     }, {
       headers: {
         'Content-Type': 'application/json'
-      },
-      withCredentials: true
+      }
     });
     
     if (response.data.success) {
       localStorage.setItem('token', response.data.token);
+      localStorage.setItem('user', JSON.stringify(response.data.user));
       return response.data;
     }
   } catch (error) {
@@ -86,11 +73,10 @@ export const getCurrentUser = async () => {
       throw new Error('No token found');
     }
     
-    const response = await axios.get(`${RENDER_API_URL}/auth/me`, {
+    const response = await axios.get(`${API_URL}/auth/me`, {
       headers: {
         Authorization: `Bearer ${token}`
-      },
-      withCredentials: true
+      }
     });
     
     if (response.data.success) {
@@ -105,11 +91,10 @@ export const getCurrentUser = async () => {
 // Logout user
 export const logout = async () => {
   try {
-    await axios.get(`${RENDER_API_URL}/auth/logout`, {
-      withCredentials: true
-    });
+    await axios.get(`${API_URL}/auth/logout`);
     
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     return true;
   } catch (error) {
     throw error.response?.data?.error || 'Unable to logout. Please try again.';
@@ -119,7 +104,7 @@ export const logout = async () => {
 // Forgot password
 export const forgotPassword = async (email) => {
   try {
-    const response = await axios.post(`${RENDER_API_URL}/auth/forgotpassword`, {
+    const response = await axios.post(`${API_URL}/auth/forgotpassword`, {
       email
     }, {
       headers: {

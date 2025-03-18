@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
-import PrivateRoute from './components/routing/PrivateRoute';
+// Comment out PrivateRoute import
+// import PrivateRoute from './components/routing/PrivateRoute';
 import Login from './components/auth/Login';
 import SignUp from './components/auth/SignUp';
 import ForgotPassword from './components/auth/ForgotPassword';
@@ -23,10 +24,8 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             
-            {/* Private Routes */}
-            <Route element={<PrivateRoute />}>
-              <Route path="/dashboard" element={<Dashboard />} />
-            </Route>
+            {/* Make Dashboard directly accessible */}
+            <Route path="/dashboard" element={<Dashboard />} />
             
             {/* Redirect to home by default */}
             <Route path="*" element={<Navigate to="/" replace />} />

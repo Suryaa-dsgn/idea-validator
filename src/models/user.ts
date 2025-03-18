@@ -83,7 +83,7 @@ UserSchema.pre<UserDocument>('save', async function (next) {
 UserSchema.methods.getSignedJwtToken = function (this: UserDocument) {
   return jwt.sign(
     { id: this._id },
-    process.env.JWT_SECRET || 'default_secret',
+    String(process.env.JWT_SECRET || 'default_secret'),
     {
       expiresIn: process.env.JWT_EXPIRES_IN || '30d',
     }

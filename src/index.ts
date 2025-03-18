@@ -47,11 +47,22 @@ app.use(errorHandler);
 const connectDB = async () => {
   try {
     const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/idea-validator';
+    
+    if (process.env.NODE_ENV === 'development' && !process.env.USE_REAL_DB) {
+      // Skip MongoDB connection in development unless explicitly required
+      logger.info('Running in development mode without MongoDB');
+      return;
+    }
+    
     await mongoose.connect(mongoURI);
     logger.info('MongoDB connected...');
   } catch (err) {
     logger.error('MongoDB connection error:', err);
-    process.exit(1);
+    if (process.env.NODE_ENV === 'development') {
+      logger.info('Continuing without MongoDB in development mode');
+    } else {
+      process.exit(1);
+    }
   }
 };
 

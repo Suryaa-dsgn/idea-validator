@@ -1,7 +1,17 @@
 [build]
-  base = "frontend"
-  publish = "build"
-  command = "npm install && npm run build"
+  publish = "."
+  command = "npm run build"
+
+[[redirects]]
+  from = "/frontend/*"
+  to = "/frontend/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/api/*"
+  to = "http://localhost:3001/api/:splat"
+  status = 200
+  force = true
 
 [[redirects]]
   from = "/*"

@@ -1,4 +1,3 @@
-import { Router } from 'express';
 import { Request, Response } from 'express-serve-static-core';
 import authRoutes from './authRoutes';
 import ideaRoutes from './ideaRoutes';

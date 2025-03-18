@@ -1,0 +1,123 @@
+[33mcommit 434b74c06f6fe22f7b58331674aae55e09ce7dfa[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: surya <suryakantadesign@gmail.com>
+Date:   Tue Mar 18 08:10:37 2025 +0530
+
+    Restore original landing page design and fix navigation without changing UI
+
+M	frontend/public/fix-navigation.js
+M	frontend/src/App.js
+
+[33mcommit 0b865b32b6535c142703d17194976766a384307f[m
+Author: surya <suryakantadesign@gmail.com>
+Date:   Tue Mar 18 07:59:52 2025 +0530
+
+    Add navigation fix script without changing landing page design
+
+A	frontend/public/fix-navigation.js
+M	frontend/public/index.html
+
+[33mcommit 42d811bfdfe533790cfa3c93c3fb6e09d9580ebe[m
+Author: surya <suryakantadesign@gmail.com>
+Date:   Tue Mar 18 07:46:28 2025 +0530
+
+    Add static HTML fallback to ensure navigation works regardless of React loading
+
+M	frontend/public/index.html
+
+[33mcommit a1eddfce47dc5ea74c3ddd7a0980e58cab5e40aa[m
+Author: surya <suryakantadesign@gmail.com>
+Date:   Tue Mar 18 07:42:00 2025 +0530
+
+    Fix navigation by using direct links and simplify Netlify config
+
+A	frontend/public/debug.html
+M	frontend/src/components/home/Home.js
+M	netlify.toml
+
+[33mcommit 2eec4de0f75ca40037df11c710b0ccc8d479b08f[m
+Author: surya <suryakantadesign@gmail.com>
+Date:   Tue Mar 18 07:30:00 2025 +0530
+
+    Add Netlify configuration and improved landing page with dashboard image
+
+A	frontend/public/_redirects
+A	frontend/src/assets/dashboard-image.svg
+M	frontend/src/components/home/Home.js
+A	netlify.toml
+
+[33mcommit 9e8b6a8730a0c1507e9b604d464342b1f4812de1[m
+Author: surya <suryakantadesign@gmail.com>
+Date:   Tue Mar 18 07:21:49 2025 +0530
+
+    Add landing page with proper navigation to login and signup
+
+M	frontend/src/App.js
+A	frontend/src/assets/logo.svg
+A	frontend/src/components/home/Home.css
+A	frontend/src/components/home/Home.js
+
+[33mcommit 04685e719c2968766a4d350897bfa95d25c627c4[m
+Author: surya <suryakantadesign@gmail.com>
+Date:   Tue Mar 18 07:13:15 2025 +0530
+
+    Fix API routing and add debugging middleware
+
+M	backend/.env.example
+A	backend/middleware/auth.middleware.js
+A	backend/middleware/error.middleware.js
+A	backend/models/idea.model.js
+A	backend/models/user.model.js
+A	backend/routes/auth.routes.js
+A	backend/routes/idea.routes.js
+M	backend/server.js
+M	backend/src/index.ts
+A	frontend/package-lock.json
+A	frontend/package.json
+A	frontend/public/api-test.html
+A	frontend/public/direct-test.html
+A	frontend/public/index.html
+A	frontend/public/manifest.json
+A	frontend/public/routes.html
+A	frontend/public/test-api.html
+A	frontend/src/App.css
+A	frontend/src/App.js
+A	frontend/src/api/auth.js
+A	frontend/src/api/ideas.js
+A	frontend/src/components/auth/AuthForms.css
+A	frontend/src/components/auth/ForgotPassword.js
+A	frontend/src/components/auth/Login.js
+A	frontend/src/components/auth/SignUp.js
+A	frontend/src/components/dashboard/Dashboard.css
+A	frontend/src/components/dashboard/Dashboard.js
+A	frontend/src/components/dashboard/IdeaCard.js
+A	frontend/src/components/dashboard/NewIdeaForm.js
+A	frontend/src/components/routing/PrivateRoute.js
+A	frontend/src/context/AuthContext.js
+A	frontend/src/index.css
+A	frontend/src/index.js
+A	frontend/src/utils/api.js
+M	images/about-illustration.svg
+
+[33mcommit 5eb210bfab466245a3d53ddaa75bfde364e37a6b[m
+Author: surya <suryakantadesign@gmail.com>
+Date:   Wed Mar 12 00:41:03 2025 +0530
+
+    changes in the chat bubble
+
+M	images/about-illustration.svg
+
+[33mcommit 02d37b4bf7e931265fa09073477ce0c17a51584a[m
+Author: surya <suryakantadesign@gmail.com>
+Date:   Wed Mar 12 00:36:25 2025 +0530
+
+    changes
+
+M	css/styles.css
+
+[33mcommit 05d4661454b5e72248771236d5f5a340563d3f56[m
+Author: surya <suryakantadesign@gmail.com>
+Date:   Tue Mar 4 18:12:38 2025 +0530
+
+    Update README with comprehensive documentation and deployment details
+
+M	README.md

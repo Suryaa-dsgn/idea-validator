@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaTimesCircle } from 'react-icons/fa';
 import './Dashboard.css';
 
@@ -16,7 +16,7 @@ const CATEGORIES = [
   'Other'
 ];
 
-const NewIdeaForm = ({ onSubmit, onCancel }) => {
+const NewIdeaForm = ({ onSubmit, onCancel, initialIdeaText = '' }) => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -29,6 +29,18 @@ const NewIdeaForm = ({ onSubmit, onCancel }) => {
   const [formErrors, setFormErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   
+  // Use initialIdeaText to populate form on mount
+  useEffect(() => {
+    if (initialIdeaText) {
+      setFormData({
+        ...formData,
+        description: initialIdeaText
+      });
+    }
+  }, [initialIdeaText]);
+
+  const { title, description, category, targetAudience, problemSolved, uniqueValueProp } = formData;
+
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     
@@ -44,21 +56,21 @@ const NewIdeaForm = ({ onSubmit, onCancel }) => {
   const validateForm = () => {
     const errors = {};
     
-    if (!formData.title.trim()) {
+    if (!title.trim()) {
       errors.title = 'Title is required';
     }
     
-    if (!formData.description.trim()) {
+    if (!description.trim()) {
       errors.description = 'Description is required';
-    } else if (formData.description.trim().length < 20) {
+    } else if (description.trim().length < 20) {
       errors.description = 'Description should be at least 20 characters';
     }
     
-    if (!formData.category) {
+    if (!category) {
       errors.category = 'Category is required';
     }
     
-    if (!formData.problemSolved.trim()) {
+    if (!problemSolved.trim()) {
       errors.problemSolved = 'Problem description is required';
     }
     
@@ -102,7 +114,7 @@ const NewIdeaForm = ({ onSubmit, onCancel }) => {
             type="text"
             id="title"
             name="title"
-            value={formData.title}
+            value={title}
             onChange={onChange}
             placeholder="Enter a clear, concise title"
             className={formErrors.title ? 'error' : ''}
@@ -115,7 +127,7 @@ const NewIdeaForm = ({ onSubmit, onCancel }) => {
           <select
             id="category"
             name="category"
-            value={formData.category}
+            value={category}
             onChange={onChange}
             className={formErrors.category ? 'error' : ''}
           >
@@ -132,7 +144,7 @@ const NewIdeaForm = ({ onSubmit, onCancel }) => {
           <textarea
             id="description"
             name="description"
-            value={formData.description}
+            value={description}
             onChange={onChange}
             placeholder="Describe your idea in detail"
             rows={3}
@@ -146,7 +158,7 @@ const NewIdeaForm = ({ onSubmit, onCancel }) => {
           <textarea
             id="problemSolved"
             name="problemSolved"
-            value={formData.problemSolved}
+            value={problemSolved}
             onChange={onChange}
             placeholder="What problem does your idea solve?"
             rows={3}
@@ -161,7 +173,7 @@ const NewIdeaForm = ({ onSubmit, onCancel }) => {
             type="text"
             id="targetAudience"
             name="targetAudience"
-            value={formData.targetAudience}
+            value={targetAudience}
             onChange={onChange}
             placeholder="Who is your idea for?"
           />
@@ -172,7 +184,7 @@ const NewIdeaForm = ({ onSubmit, onCancel }) => {
           <textarea
             id="uniqueValueProp"
             name="uniqueValueProp"
-            value={formData.uniqueValueProp}
+            value={uniqueValueProp}
             onChange={onChange}
             placeholder="What makes your idea unique or better than existing solutions?"
             rows={3}
