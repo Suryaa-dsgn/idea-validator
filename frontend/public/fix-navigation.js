@@ -1,4 +1,4 @@
-// Script to fix navigation links on the landing page
+// Script to fix navigation links on the landing page without changing design
 document.addEventListener('DOMContentLoaded', function() {
   // Function to handle navigation links
   function fixNavigationLinks() {
@@ -6,40 +6,46 @@ document.addEventListener('DOMContentLoaded', function() {
     const allElements = document.querySelectorAll('a, button');
     
     allElements.forEach(element => {
-      // Get the text content
-      const text = element.textContent.trim();
+      // Check if element has children that contain text
+      let textContent = element.textContent.trim();
       
-      // Fix Sign Up links
-      if (text === 'Sign Up' || text === 'Validate My Idea →' || text.includes('Get Started')) {
-        // Store the original href if it's a link
-        const originalHref = element.getAttribute('href');
+      // Check for Sign Up buttons
+      if (textContent === 'Sign Up' || 
+          textContent.includes('Sign Up') || 
+          textContent.includes('Validate My Idea') || 
+          textContent.includes('Get Started')) {
         
+        // Add click handler
         element.addEventListener('click', function(event) {
           event.preventDefault();
-          console.log('Navigating to signup page');
           window.location.href = '/signup';
         });
       }
       
-      // Fix Log In links
-      if (text === 'Log In') {
-        // Store the original href if it's a link
-        const originalHref = element.getAttribute('href');
+      // Check for Log In buttons
+      if (textContent === 'Log In' || 
+          textContent.includes('Log In')) {
         
+        // Add click handler
         element.addEventListener('click', function(event) {
           event.preventDefault();
-          console.log('Navigating to login page');
           window.location.href = '/login';
         });
       }
     });
     
-    console.log('Navigation links fixed');
+    console.log('Navigation links fixed without changing design');
   }
   
-  // Try to fix links immediately
+  // Run immediately and also after a slight delay to ensure all elements are loaded
   fixNavigationLinks();
-  
-  // Also try again after a delay in case the page content loads dynamically
   setTimeout(fixNavigationLinks, 1000);
+  
+  // Also run when React's content changes
+  const observer = new MutationObserver(function(mutations) {
+    fixNavigationLinks();
+  });
+
+  // Start observing the document body for DOM changes
+  observer.observe(document.body, { childList: true, subtree: true });
 }); 

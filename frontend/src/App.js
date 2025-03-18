@@ -5,8 +5,11 @@ import Login from './components/auth/Login';
 import SignUp from './components/auth/SignUp';
 import ForgotPassword from './components/auth/ForgotPassword';
 import Dashboard from './components/dashboard/Dashboard';
-import Home from './components/home/Home';
 import './App.css';
+
+// Empty placeholder component for landing page
+// This will let your original HTML landing page show through
+const EmptyLanding = () => <div style={{ display: 'none' }}></div>;
 
 function App() {
   return (
@@ -15,7 +18,7 @@ function App() {
         <div className="App">
           <Routes>
             {/* Public Routes */}
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<EmptyLanding />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
