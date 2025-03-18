@@ -1,14 +1,10 @@
 [build]
-  base = "."
-  publish = "frontend/build"
-  command = "cd frontend && npm install && DISABLE_ESLINT_PLUGIN=true CI=false npm run build"
-  
+  base = "frontend"
+  publish = "build"
+  command = "npm ci && CI=false npm run build"
+
 [build.environment]
-  NODE_VERSION = "18.15.0"
-  NPM_VERSION = "9.5.0"
-  CI = "false"
-  ESLINT_NO_DEV_ERRORS = "true"
-  DISABLE_ESLINT_PLUGIN = "true"
+  NODE_VERSION = "18"
 
 # All routes to React app (SPA)
 [[redirects]]
