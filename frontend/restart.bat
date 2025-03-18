@@ -1,0 +1,3 @@
+@echo off
+echo Restarting React application...
+npm start 

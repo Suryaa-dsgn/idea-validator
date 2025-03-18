@@ -1,90 +1,32 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './Home.css';
-import logo from '../../assets/logo.svg';
-import dashboardImage from '../../assets/dashboard-image.svg'; // Using SVG image
+import React, { useEffect } from 'react';
 
 const Home = () => {
-  return (
-    <div className="home-container">
-      {/* Navigation Bar */}
-      <nav className="navbar">
-        <div className="navbar-container">
-          <Link to="/" className="navbar-logo">
-            <img src={logo} alt="IdeaValidator" />
-            <span>IdeaValidator</span>
-          </Link>
-          
-          <div className="navbar-links">
-            <Link to="/#about" className="nav-link">About</Link>
-            <Link to="/#how-it-works" className="nav-link">How It Works</Link>
-            <Link to="/#success-stories" className="nav-link">Success Stories</Link>
-            <Link to="/#contact" className="nav-link">Contact</Link>
-          </div>
-          
-          <div className="navbar-cta">
-            <a href="/login" className="btn btn-secondary">Log In</a>
-            <a href="/signup" className="btn btn-primary">Sign Up</a>
-          </div>
-        </div>
-      </nav>
-      
-      {/* Hero Section */}
-      <section className="hero-section">
-        <div className="hero-container">
-          <div className="hero-content">
-            <h1>Transform Your Startup Ideas into Reality with AI</h1>
-            <p className="hero-description">
-              Get instant, data-driven validation for your startup concepts.
-              No more guesswork, just actionable insights to help you build with confidence.
-            </p>
-            
-            <div className="hero-input-container">
-              <input 
-                type="text" 
-                className="hero-input" 
-                placeholder="Enter your startup idea..." 
-              />
-              <a href="/signup" className="btn hero-btn">
-                Validate My Idea →
-              </a>
-            </div>
-            
-            <div className="hero-stats">
-              <div className="stat">
-                <h3>5,000+</h3>
-                <p>Ideas Validated</p>
-              </div>
-              <div className="stat">
-                <h3>87%</h3>
-                <p>Accuracy Rate</p>
-              </div>
-              <div className="stat">
-                <h3>2,300+</h3>
-                <p>Happy Founders</p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="hero-image">
-            <img 
-              src={dashboardImage} 
-              alt="Idea Validation Report" 
-              className="dashboard-image" 
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = "https://placehold.co/600x400/6c63ff/ffffff?text=Idea+Validator";
-              }}
-            />
-          </div>
-        </div>
-      </section>
-      
-      {/* You can add more sections here for About, How It Works, etc. */}
-      
-      {/* Footer would go here */}
-    </div>
-  );
+  useEffect(() => {
+    // Get the static fallback content from index.html
+    const staticContent = document.getElementById('static-fallback');
+    
+    // If there's a static fallback, show it
+    if (staticContent) {
+      staticContent.style.display = 'block';
+    }
+    
+    // Load any scripts needed for the static home page
+    const script = document.createElement('script');
+    script.src = '/fix-navigation.js';
+    script.async = true;
+    document.body.appendChild(script);
+    
+    return () => {
+      // Clean up when component unmounts
+      if (staticContent) {
+        staticContent.style.display = 'none';
+      }
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  // Return an empty div - the static content will be shown instead
+  return <div style={{ display: 'none' }}></div>;
 };
 
 export default Home; 
