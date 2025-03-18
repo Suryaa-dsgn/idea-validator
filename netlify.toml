@@ -1,12 +1,40 @@
 [build]
-  base = "frontend"
-  publish = "build"
-  command = "npm ci && CI=false npm run build"
+  base = "."
+  publish = "."
+  command = "cd frontend && npm ci && CI=false npm run build"
 
 [build.environment]
   NODE_VERSION = "18"
 
-# All routes to React app (SPA)
+# Auth routes go to the React app
+[[redirects]]
+  from = "/login"
+  to = "/frontend/build/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/signup"
+  to = "/frontend/build/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/dashboard"
+  to = "/frontend/build/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/forgot-password"
+  to = "/frontend/build/index.html"
+  status = 200
+
+# For the API
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+  force = true
+
+# All other routes go to the static homepage
 [[redirects]]
   from = "/*"
   to = "/index.html"
