@@ -1,5 +1,4 @@
 import { createContext, useState, useEffect } from 'react';
-import { register as apiRegister, login as apiLogin, logout as apiLogout, getCurrentUser } from '../utils/api';
 
 // Create auth context
 export const AuthContext = createContext();
@@ -9,95 +8,110 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   // Load user on initial app load
   useEffect(() => {
-    const loadUser = async () => {
-      setIsLoading(true);
-      
+    // Simplified authentication check
+    if (token) {
       try {
-        if (token) {
-          const userData = await getCurrentUser();
-          setUser(userData.data);
+        // Just check if there's a user in localStorage
+        const savedUser = localStorage.getItem('user');
+        if (savedUser) {
+          setUser(JSON.parse(savedUser));
           setIsAuthenticated(true);
         }
       } catch (err) {
+        console.error("Error loading user:", err);
         localStorage.removeItem('token');
+        localStorage.removeItem('user');
         setToken(null);
         setUser(null);
         setIsAuthenticated(false);
-        setError('Authentication failed. Please log in again.');
       }
-      
-      setIsLoading(false);
-    };
-
-    loadUser();
+    }
   }, [token]);
 
-  // Register user
+  // Register user - simplified mock version
   const register = async (userData) => {
     setIsLoading(true);
     setError(null);
     
     try {
-      const response = await apiRegister(userData);
+      // Mock successful registration
+      console.log("Registering user:", userData);
       
-      localStorage.setItem('token', response.token);
-      setToken(response.token);
-      setUser(response.data);
+      // Create mock user and token
+      const mockUser = {
+        id: 'temp-' + Date.now(),
+        name: userData.name,
+        email: userData.email
+      };
+      
+      const mockToken = 'mock-token-' + Date.now();
+      
+      // Store in localStorage
+      localStorage.setItem('token', mockToken);
+      localStorage.setItem('user', JSON.stringify(mockUser));
+      
+      // Update state
+      setToken(mockToken);
+      setUser(mockUser);
       setIsAuthenticated(true);
-      setIsLoading(false);
       
-      return response.data;
+      return mockUser;
     } catch (err) {
+      setError('Registration failed');
+      throw new Error('Registration failed');
+    } finally {
       setIsLoading(false);
-      setError(err.response?.data?.error || 'Registration failed. Please try again.');
-      throw err;
     }
   };
 
-  // Login user
+  // Login user - simplified mock version
   const login = async (email, password) => {
     setIsLoading(true);
     setError(null);
     
     try {
-      const response = await apiLogin(email, password);
+      console.log("Logging in user:", email);
       
-      localStorage.setItem('token', response.token);
-      setToken(response.token);
-      setUser(response.data);
+      // Create mock user and token
+      const mockUser = {
+        id: 'temp-' + Date.now(),
+        name: email.split('@')[0], // Use part of email as name
+        email: email
+      };
+      
+      const mockToken = 'mock-token-' + Date.now();
+      
+      // Store in localStorage
+      localStorage.setItem('token', mockToken);
+      localStorage.setItem('user', JSON.stringify(mockUser));
+      
+      // Update state
+      setToken(mockToken);
+      setUser(mockUser);
       setIsAuthenticated(true);
-      setIsLoading(false);
       
-      return response.data;
+      return mockUser;
     } catch (err) {
+      setError('Login failed');
+      throw new Error('Login failed');
+    } finally {
       setIsLoading(false);
-      setError(err.response?.data?.error || 'Login failed. Please check your credentials.');
-      throw err;
     }
   };
 
   // Logout user
-  const logout = async () => {
-    setIsLoading(true);
-    
-    try {
-      await apiLogout();
-      
-      localStorage.removeItem('token');
-      setToken(null);
-      setUser(null);
-      setIsAuthenticated(false);
-      setError(null);
-    } catch (err) {
-      setError(err.response?.data?.error || 'Logout failed. Please try again.');
-    }
-    
-    setIsLoading(false);
+  const logout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    setToken(null);
+    setUser(null);
+    setIsAuthenticated(false);
+    setError(null);
   };
 
   // Clear any errors
