@@ -1,8 +1,13 @@
 import axios from 'axios';
 
-// API URLs
+// API URLs - Configure for both development and production
 const LOCAL_API_URL = '/api';
-const API_URL = LOCAL_API_URL;
+const NETLIFY_FUNCTION_URL = '/.netlify/functions/api';
+
+// Use the Netlify Functions URL in production, local API in development
+const API_URL = process.env.NODE_ENV === 'production' 
+  ? NETLIFY_FUNCTION_URL 
+  : LOCAL_API_URL;
 
 // Register user
 export const register = async (userData) => {
@@ -45,6 +50,8 @@ export const register = async (userData) => {
 // Login user
 export const login = async (email, password) => {
   try {
+    console.log(`Attempting login at: ${API_URL}/auth/login`);
+    
     const response = await axios.post(`${API_URL}/auth/login`, {
       email,
       password
@@ -54,12 +61,15 @@ export const login = async (email, password) => {
       }
     });
     
+    console.log('Login response:', response.data);
+    
     if (response.data.success) {
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.user));
       return response.data;
     }
   } catch (error) {
+    console.error('Login error:', error);
     throw error.response?.data?.error || 'Invalid credentials. Please try again.';
   }
 };

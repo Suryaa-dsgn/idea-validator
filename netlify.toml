@@ -9,34 +9,35 @@
   NPM_VERSION = "9.5.0"
   NETLIFY_USE_YARN = "false"
 
-# Handle routes for the React application
-[[redirects]]
-  from = "/login"
-  to = "/frontend/build/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/signup"
-  to = "/frontend/build/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/dashboard"
-  to = "/frontend/build/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/forgot-password"
-  to = "/frontend/build/index.html"
-  status = 200
-
+# API routes
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/api/:splat"
   status = 200
   force = true
 
-# Fallback for all other routes to the main site
+# React app routes
+[[redirects]]
+  from = "/login"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/signup"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/dashboard"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/forgot-password"
+  to = "/index.html"
+  status = 200
+
+# Fallback to index
 [[redirects]]
   from = "/*"
   to = "/index.html"
