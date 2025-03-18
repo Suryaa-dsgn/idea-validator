@@ -6,6 +6,12 @@
 [build.environment]
   NODE_VERSION = "18"
 
+# Make sure all static assets from frontend build are accessible
+[[redirects]]
+  from = "/static/*"
+  to = "/frontend/build/static/:splat"
+  status = 200
+
 # Auth routes go to the React app
 [[redirects]]
   from = "/login"
@@ -27,14 +33,14 @@
   to = "/frontend/build/index.html"
   status = 200
 
-# For the API
+# API routes
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/api/:splat"
   status = 200
   force = true
 
-# All other routes go to the static homepage
+# Root and all other non-matched routes go to the static homepage
 [[redirects]]
   from = "/*"
   to = "/index.html"

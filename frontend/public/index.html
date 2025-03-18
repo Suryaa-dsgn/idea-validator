@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <base href="/frontend/build/" />
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -41,17 +42,33 @@
         padding: 40px;
         font-size: 16px;
       }
+      
+      .error-container {
+        padding: 20px;
+        margin: 20px;
+        background-color: #ffebee;
+        border: 1px solid #ffcdd2;
+        border-radius: 4px;
+        color: #c62828;
+      }
     </style>
     <script>
       console.log('HTML document loaded');
+      
       window.addEventListener('DOMContentLoaded', function() {
         console.log('DOM fully loaded');
-        document.getElementById('loading-message').style.display = 'block';
+        var loadingMessage = document.getElementById('loading-message');
+        if (loadingMessage) {
+          loadingMessage.style.display = 'block';
+        }
       });
       
       window.addEventListener('error', function(e) {
         console.log('Global error caught:', e.message, e.filename, e.lineno);
-        document.getElementById('root').innerHTML = '<div style="padding: 20px; color: red;"><h2>Error Loading App</h2><p>' + e.message + '</p></div>';
+        var rootElement = document.getElementById('root');
+        if (rootElement) {
+          rootElement.innerHTML = '<div class="error-container"><h2>Error Loading App</h2><p>' + e.message + '</p><p>Location: ' + e.filename + ':' + e.lineno + '</p></div>';
+        }
       });
     </script>
   </head>
